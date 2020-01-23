@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Taskiton/taskiton/static/css/main.7e34f606.chunk.css",
-    "main.js": "/Taskiton/taskiton/static/js/main.9d99cb5f.chunk.js",
-    "main.js.map": "/Taskiton/taskiton/static/js/main.9d99cb5f.chunk.js.map",
-    "runtime-main.js": "/Taskiton/taskiton/static/js/runtime-main.3d164d73.js",
-    "runtime-main.js.map": "/Taskiton/taskiton/static/js/runtime-main.3d164d73.js.map",
-    "static/js/2.46e641a3.chunk.js": "/Taskiton/taskiton/static/js/2.46e641a3.chunk.js",
-    "static/js/2.46e641a3.chunk.js.map": "/Taskiton/taskiton/static/js/2.46e641a3.chunk.js.map",
-    "index.html": "/Taskiton/taskiton/index.html",
-    "precache-manifest.3a81133bbab74ba6a9ee7f2e506dd251.js": "/Taskiton/taskiton/precache-manifest.3a81133bbab74ba6a9ee7f2e506dd251.js",
-    "service-worker.js": "/Taskiton/taskiton/service-worker.js",
-    "static/css/main.7e34f606.chunk.css.map": "/Taskiton/taskiton/static/css/main.7e34f606.chunk.css.map",
-    "static/js/2.46e641a3.chunk.js.LICENSE": "/Taskiton/taskiton/static/js/2.46e641a3.chunk.js.LICENSE"
+    "main.css": "/taskiton/static/css/main.7e34f606.chunk.css",
+    "main.js": "/taskiton/static/js/main.a85dc544.chunk.js",
+    "main.js.map": "/taskiton/static/js/main.a85dc544.chunk.js.map",
+    "runtime-main.js": "/taskiton/static/js/runtime-main.96836dd4.js",
+    "runtime-main.js.map": "/taskiton/static/js/runtime-main.96836dd4.js.map",
+    "static/js/2.46e641a3.chunk.js": "/taskiton/static/js/2.46e641a3.chunk.js",
+    "static/js/2.46e641a3.chunk.js.map": "/taskiton/static/js/2.46e641a3.chunk.js.map",
+    "index.html": "/taskiton/index.html",
+    "precache-manifest.051d4d3713cc5fb2a89283ba1afc8f3c.js": "/taskiton/precache-manifest.051d4d3713cc5fb2a89283ba1afc8f3c.js",
+    "service-worker.js": "/taskiton/service-worker.js",
+    "static/css/main.7e34f606.chunk.css.map": "/taskiton/static/css/main.7e34f606.chunk.css.map",
+    "static/js/2.46e641a3.chunk.js.LICENSE": "/taskiton/static/js/2.46e641a3.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.3d164d73.js",
+    "static/js/runtime-main.96836dd4.js",
     "static/js/2.46e641a3.chunk.js",
     "static/css/main.7e34f606.chunk.css",
-    "static/js/main.9d99cb5f.chunk.js"
+    "static/js/main.a85dc544.chunk.js"
   ]
 }
