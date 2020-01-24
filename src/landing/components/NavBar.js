@@ -7,27 +7,34 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
   root: {
       marginLeft: theme.spacing(2),
-      paddingRight:"10%",
-      padding:"2vh",
-  },
-  link: {
-      paddingRight:"5%",
+      paddingRight:'10%',
+      padding:'2vh',
+      
   }
 }));
-
-export default function NavBar() {
+NavBar.defaultProps = {
+  isHamNav:false,
+}
+export default function NavBar(props) {
   const classes = useStyles();
   const preventDefault = event => event.preventDefault();
-
+  
+  const linkStyle = (props.isHamNav)?
+  {
+    display:'block',
+  }:{
+    paddingRight:'5%',
+  };
+  
   return (
     <Typography className={classes.root} >
-      <Link href="#" onClick={preventDefault} className={classes.link}>
-        Link1
+      <Link href="#" onClick={preventDefault} style={linkStyle}>
+        Link1 
       </Link>
-      <Link href="#" onClick={preventDefault} className={classes.link}>
+      <Link href="#" onClick={preventDefault} style={linkStyle}>
         Link2
       </Link>
-      <Link href="#" onClick={preventDefault} className={classes.link}>
+      <Link href="#" onClick={preventDefault} style={linkStyle}>
         Link3
       </Link>
     </Typography>
