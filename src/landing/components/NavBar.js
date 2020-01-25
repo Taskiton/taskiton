@@ -20,11 +20,15 @@ NavBar.defaultProps = {
 }
 export default function NavBar(props) {
   const classes = useStyles();
+
   const preventDefault = event => event.preventDefault();
   
   const linkStyle = (props.isHamNav)?
   {
     display:'block',
+    textAlign:'center',
+    paddingTop: '30%',
+    boxShadow: '0px 2px #888888',
   }:{
     paddingRight:'5%',
     
