@@ -2,6 +2,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import { shadows } from '@material-ui/system';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
@@ -9,6 +11,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(2),
       paddingRight:'10%',
       padding:'2vh',
+     
       
   }
 }));
@@ -28,10 +31,12 @@ export default function NavBar(props) {
     boxShadow: '0px 2px #888888',
   }:{
     paddingRight:'5%',
+    
   };
   
   return (
-    <Typography className={classes.root} >
+  <div>
+     <Typography  className={classes.root} >
       <Link href="#" onClick={preventDefault} style={linkStyle}>
         Link1 
       </Link>
@@ -42,5 +47,7 @@ export default function NavBar(props) {
         Link3
       </Link>
     </Typography>
+  </div>
+    
   );
 }
