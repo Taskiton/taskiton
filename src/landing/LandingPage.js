@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         }
     }
 }));
-//Fix this
+
 export default function LandingPage() {
     const classes = useStyles();
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
