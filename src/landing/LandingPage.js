@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
         }
     }
 }));
-
-export default function FullWidthGrid() {
+//Fix this
+export default function LandingPage() {
     const classes = useStyles();
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     
