@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/taskiton/static/css/main.7e34f606.chunk.css",
-    "main.js": "/taskiton/static/js/main.a85dc544.chunk.js",
-    "main.js.map": "/taskiton/static/js/main.a85dc544.chunk.js.map",
+    "main.css": "/taskiton/static/css/main.ed305615.chunk.css",
+    "main.js": "/taskiton/static/js/main.62304a75.chunk.js",
+    "main.js.map": "/taskiton/static/js/main.62304a75.chunk.js.map",
     "runtime-main.js": "/taskiton/static/js/runtime-main.96836dd4.js",
     "runtime-main.js.map": "/taskiton/static/js/runtime-main.96836dd4.js.map",
     "static/js/2.46e641a3.chunk.js": "/taskiton/static/js/2.46e641a3.chunk.js",
     "static/js/2.46e641a3.chunk.js.map": "/taskiton/static/js/2.46e641a3.chunk.js.map",
     "index.html": "/taskiton/index.html",
-    "precache-manifest.051d4d3713cc5fb2a89283ba1afc8f3c.js": "/taskiton/precache-manifest.051d4d3713cc5fb2a89283ba1afc8f3c.js",
+    "precache-manifest.a505159dad18f0bcfac5d5e7a49f8057.js": "/taskiton/precache-manifest.a505159dad18f0bcfac5d5e7a49f8057.js",
     "service-worker.js": "/taskiton/service-worker.js",
-    "static/css/main.7e34f606.chunk.css.map": "/taskiton/static/css/main.7e34f606.chunk.css.map",
+    "static/css/main.ed305615.chunk.css.map": "/taskiton/static/css/main.ed305615.chunk.css.map",
     "static/js/2.46e641a3.chunk.js.LICENSE": "/taskiton/static/js/2.46e641a3.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.96836dd4.js",
     "static/js/2.46e641a3.chunk.js",
-    "static/css/main.7e34f606.chunk.css",
-    "static/js/main.a85dc544.chunk.js"
+    "static/css/main.ed305615.chunk.css",
+    "static/js/main.62304a75.chunk.js"
   ]
 }

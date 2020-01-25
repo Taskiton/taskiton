@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "83fd28c21fdb71d6f3beabeaa9027696",
+    "revision": "48d5509c4220538617bbe41fa97412ac",
     "url": "/taskiton/index.html"
   },
   {
-    "revision": "e625168bbe95e430b501",
-    "url": "/taskiton/static/css/main.7e34f606.chunk.css"
+    "revision": "9970269047f5ad6bd1a5",
+    "url": "/taskiton/static/css/main.ed305615.chunk.css"
   },
   {
     "revision": "bf02015fa9d5d28bf685",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/taskiton/static/js/2.46e641a3.chunk.js.LICENSE"
   },
   {
-    "revision": "e625168bbe95e430b501",
-    "url": "/taskiton/static/js/main.a85dc544.chunk.js"
+    "revision": "9970269047f5ad6bd1a5",
+    "url": "/taskiton/static/js/main.62304a75.chunk.js"
   },
   {
     "revision": "1d1c5a4e15af40c91fa9",
