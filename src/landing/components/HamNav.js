@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    height: '6vh',
+    height: '7vh',
+    backgroundColor:'#A8D0E6'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -92,13 +93,15 @@ export default function HamNav() {
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
+          color:'purple'
         })}
       >
         <Toolbar>
           <Typography variant="h6" noWrap className={classes.title}>
           </Typography>
           <IconButton
-            color="inherit"
+            color="black"
+            fontWeight="bold"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
