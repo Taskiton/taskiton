@@ -1,22 +1,23 @@
 {
   "files": {
     "main.css": "/taskiton/static/css/main.ed305615.chunk.css",
-    "main.js": "/taskiton/static/js/main.62304a75.chunk.js",
-    "main.js.map": "/taskiton/static/js/main.62304a75.chunk.js.map",
+    "main.js": "/taskiton/static/js/main.581bdc4c.chunk.js",
+    "main.js.map": "/taskiton/static/js/main.581bdc4c.chunk.js.map",
     "runtime-main.js": "/taskiton/static/js/runtime-main.96836dd4.js",
     "runtime-main.js.map": "/taskiton/static/js/runtime-main.96836dd4.js.map",
-    "static/js/2.46e641a3.chunk.js": "/taskiton/static/js/2.46e641a3.chunk.js",
-    "static/js/2.46e641a3.chunk.js.map": "/taskiton/static/js/2.46e641a3.chunk.js.map",
+    "static/js/2.73a300e9.chunk.js": "/taskiton/static/js/2.73a300e9.chunk.js",
+    "static/js/2.73a300e9.chunk.js.map": "/taskiton/static/js/2.73a300e9.chunk.js.map",
     "index.html": "/taskiton/index.html",
-    "precache-manifest.a505159dad18f0bcfac5d5e7a49f8057.js": "/taskiton/precache-manifest.a505159dad18f0bcfac5d5e7a49f8057.js",
+    "precache-manifest.0c5cd84ed48d2cb279f1886f65c2125d.js": "/taskiton/precache-manifest.0c5cd84ed48d2cb279f1886f65c2125d.js",
     "service-worker.js": "/taskiton/service-worker.js",
     "static/css/main.ed305615.chunk.css.map": "/taskiton/static/css/main.ed305615.chunk.css.map",
-    "static/js/2.46e641a3.chunk.js.LICENSE": "/taskiton/static/js/2.46e641a3.chunk.js.LICENSE"
+    "static/js/2.73a300e9.chunk.js.LICENSE": "/taskiton/static/js/2.73a300e9.chunk.js.LICENSE",
+    "static/media/task-icons.svg": "/taskiton/static/media/task-icons.4a256973.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.96836dd4.js",
-    "static/js/2.46e641a3.chunk.js",
+    "static/js/2.73a300e9.chunk.js",
     "static/css/main.ed305615.chunk.css",
-    "static/js/main.62304a75.chunk.js"
+    "static/js/main.581bdc4c.chunk.js"
   ]
 }
