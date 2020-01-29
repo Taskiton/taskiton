@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: theme.spacing(2),
@@ -88,15 +89,17 @@ export default function NavBar(props) {
         </Box>
         <Box component="span" >
 
-          <Link to="/signup">
+          <Link to="/signup" style={{textDecoration:"none"}}>
             <Button variant="contained" className={classes.buttonStyle} style={{ backgroundColor: '#000000' }}>Signup</Button>
           </Link>
 
-          <Button variant="contained" className={classes.buttonStyle}>
-            Try for free
-      </Button>
+          <Link to="/dashboard" style={{textDecoration:"none"}}>
+            <Button variant="contained" className={classes.buttonStyle}>
+              Dashboard
+            </Button>
+          </Link>
         </Box>
       </Typography>
-    </div>  
+    </div>
   );
 }
