@@ -21,8 +21,6 @@ export default function Dashboard() {
         // get the mouse cursor position at startup:
         pos3 = event.clientX;
         pos4 = event.clientY;
-        //document.onmouseup = closeDragElement;
-        // call a function whenever the cursor moves:
         document.onmousemove = elementDrag;
     }
 
@@ -31,17 +29,15 @@ export default function Dashboard() {
         pos2 = pos4 - event.clientY;
         pos3 = event.clientX;
         pos4 = event.clientY;
-        // set the element's new position:
-        console.log(event);
-        event.target.style.top = (event.target.offsetTop - pos2) + "px";
-        event.target.style.left = (event.target.offsetLeft - pos1) + "px";
+        event.target.style.marginTop = (event.target.offsetTop - pos2) + "px";
+        event.target.style.marginLeft = (event.target.offsetLeft - pos1) + "px";
     }
 
 
     return (
         <div>
             <div style={mydiv}>
-                <div style={mydivheader} onMouseDown={handleMouseDown}>Click here to move</div>
+                <div style={mydivheader} onMouseDown={handleMouseDown}>Click here to move!</div>
                 <p>Move</p>
                 <p>this</p>
                 <p>DIV</p>
