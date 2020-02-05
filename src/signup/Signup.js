@@ -54,7 +54,7 @@ export default function Signup() {
     return(
         <div className={classes.formStyle}>
             <Grid container>
-            <Grid item xs={12} sm={6} style={{backgroundColor:'#F76C6C'}}>
+            <Grid item xs={12} sm={6}>
                 <img className={classes.signupImage} src={signupLogo}></img>
             </Grid>
                 <Grid item xs={12} sm={6}>
