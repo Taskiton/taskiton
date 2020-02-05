@@ -30,11 +30,18 @@ const useStyles = makeStyles(theme => ({
       width: '100%',
       marginTop: theme.spacing(2),
       marginLeft: 0
+    },
+    '&:hover': {
+      backgroundColor: '#dc5a5a',
+      borderColor: '#dc5a5a',
+      boxShadow: 'none',
     }
   },
   linkStyle: {
     fontWeight: 'bold',
     color: 'black',
+    fontSize: '1.1em',
+    textDecoration: 'none',
     fontFamily: 'sans-serif',
     position: 'relative',
     left: '5vw',
