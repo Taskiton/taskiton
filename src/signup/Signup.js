@@ -11,8 +11,19 @@ const useStyles = signupPageStyle
 
 export default function Signup() {
 
-    const [name, setName] = useState("Yalcin");
-    const [lastname, setLastname] = useState("tatar");
+    const [user, setUser] = useState({
+        mail:"",
+        name:"",
+        lastname:"",
+        password:"",
+        copassword:""
+    });
+    // const [name, setName] = useState("");
+    // const [lastname, setLastname] = useState("");
+    // const [mail, setMail] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [copassword, setCopassword] = useState("");
+
     const classes = useStyles();
     const frmStyle = {
         height:'75vh',
@@ -26,10 +37,13 @@ export default function Signup() {
     function handleSubmit(event){
         event.preventDefault()
         var data = {
-            name: name,
-            lastname: lastname
+            name: user.name,
+            lastname: user.lastname,
+            mail: user.mail,
+            password: user.password,
+            copassword: user.copassword,
         }
-       console.log(data)
+       console.log(data);
         fetch("http://localhost:3003/user_create" , {
             method: 'POST',
             mode: 'cors',
@@ -48,8 +62,16 @@ export default function Signup() {
         }).catch(function(err) {
             console.log(err)
         });
+        console.log(data);
     }
 
+    function handleChange(event){
+        const fieldName = event.target.name;
+        setUser({
+            [fieldName]: event.target.value
+        })
+         console.log(fieldName)
+      }
 
     return(
         <div className={classes.formStyle}>
@@ -60,13 +82,13 @@ export default function Signup() {
                 <Grid item xs={12} sm={6}>
                 <form onSubmit={(event) => handleSubmit(event)} style={frmStyle} noValidate autoComplete="off">
                     <h1 style={{textAlign:'center', fontSize:'2.1em', marginTop:'0',color:'black'}}>Create Account</h1>
-                    <FormItem style={{marginTop:'1vh'}} label="Email"/>
-                    <FormItem label="First Name" value="Gokce"/>
-                    <FormItem label="Last Name"/>
-                    <FormItem label="Password"/>
-                    <FormItem label="Confirm Password"/>
+                    <FormItem style={{marginTop:'1vh'}} label="Email" name='email' value={user.mail} onChange={(event)=>handleChange(event)}/>
+                    <FormItem label="First Name" name='name' value={user.name} onChange={(event)=>handleChange(event)}/>
+                    <FormItem label="Last Name" name='lastname' value={user.lastname} onChange={(event)=>handleChange(event)}/>
+                    <FormItem label="Password" name='password' value={user.password} onChange={(event)=>handleChange(event)}/>
+                    <FormItem label="Confirm Password" name='copassword' value={user.copassword} onChange={(event)=>handleChange(event)}/>
                     <Button type="submit" className={classes.signUpButton} variant="contained" color="primary"> SIGN UP </Button>
-                    <Button type="submit" style={{border:'1px solid #cacaca',backgroundColor:"rgba(206, 200, 200, 0.45)",color:'black'}} className={classes.signUpButton} variant="contained" color="primary"> LOGIN </Button>
+                    <Button style={{border:'1px solid #cacaca',backgroundColor:"rgba(206, 200, 200, 0.45)",color:'black'}} className={classes.signUpButton} variant="contained" color="primary"> LOGIN </Button>
                 </form>
              </Grid>
             </Grid>

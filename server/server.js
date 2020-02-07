@@ -22,7 +22,9 @@ app.post('/user_create', (req,res) => {
     
     
 
-    dbConnection.query(`INSERT INTO taskiton (firstname, lastname) VALUES ("${req.body.name}", "${req.body.lastname}")`,(err, results, fields) => {
+    dbConnection.query(`INSERT INTO taskiton (email,firstname, lastname, password, confirmpassword) 
+    VALUES ("${req.body.mail}","${req.body.name}", "${req.body.lastname}", "${req.body.password}", "${req.body.copassword}")`
+    ,(err, results, fields) => {
         if(err){
             console.log("Failed" + err);
             res.sendStatus(500)
@@ -36,7 +38,7 @@ app.post('/user_create', (req,res) => {
 
 app.get('/user/:id', (req,res) => {
     console.log("Fetching user with" + req.params.id);
-    dbConnection.query(`SELECT * FROM taskiton WHERE id=${req.params.id}` , (err, rows, fieds) => {
+    dbConnection.query(`SELECT * FROM taskiton WHERE user_id=${req.params.id}` , (err, rows, fieds) => {
     if(err){
         console.log("Failed" + err);
         res.end()

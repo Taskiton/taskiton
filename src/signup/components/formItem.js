@@ -21,7 +21,7 @@ export default function FormItem (props){
     }
     return(
         <Grid item xs={12}>
-                <TextField  id="filled-secondary" color="secondary" style={formItem}  id="outlined-basic" label={props.label} value={props.value} name={props.name} variant="outlined" />
+                <TextField   color="secondary" style={formItem}   name={props.name} label={props.label} value={props.value} onChange={props.onChange} variant="outlined" />
                 
         </Grid>
     )

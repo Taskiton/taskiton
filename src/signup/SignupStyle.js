@@ -12,9 +12,9 @@ export const signupPageStyle = makeStyles(theme => ({
         width: '100%',
     },
     signupImage:{
-        width:'80%',
+        width:'70%',
         margin:'auto',
-        padding:theme.spacing(7),
+        padding:'5vw',
         paddingTop:'6vh',
         [theme.breakpoints.between('xs','sm')]: {
             paddingTop:'15vh',
