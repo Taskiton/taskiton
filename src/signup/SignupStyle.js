@@ -44,6 +44,25 @@ export const signupPageStyle = makeStyles(theme => ({
             backgroundColor: '#F76C6C',
             borderColor: '#F76C6C',
           },
+    },
+    loginButton:{
+        backgroundColor: '#A8D0E6',
+        width:'45%',
+        height: '50px',
+        display: 'inline',
+        marginLeft:'auto',
+        marginRight:'1vw',
+        marginTop:'3vh',
+        '&:hover': {
+            backgroundColor: '#86b8d4',
+            borderColor: '#86b8d4',
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+            backgroundColor: '#A8D0E6',
+            borderColor: '#A8D0E6',
+          },
     }
    
 }));

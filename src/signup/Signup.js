@@ -18,11 +18,6 @@ export default function Signup() {
         password: "",
         copassword: ""
     });
-    // const [name, setName] = useState("");
-    // const [lastname, setLastname] = useState("");
-    // const [mail, setMail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [copassword, setCopassword] = useState("");
 
     const classes = useStyles();
     const frmStyle = {
@@ -31,7 +26,6 @@ export default function Signup() {
         paddingRight: '7vw',
         paddingTop: '5vh',
         // boxShadow: 'rgb(216, 215, 215) 1px 2px 10px 2px',
-
     }
 
     function handleSubmit(event) {
@@ -64,22 +58,14 @@ export default function Signup() {
         });
         console.log(data);
     }
-    /////////////////////////////////////////////////////////////////////////////////////
-    //https://stackoverflow.com/questions/31048953/what-do-these-three-dots-in-react-do
-    // const arsh = {
-    //     "a":1,
-    //       "b":2,
-    // };
-    // const final = {...arsh, "b":3};
-    // console.log(final); //You can run this code to understand. Thank you.
-    //////////////////////////////////////////////////////////////////////////////////////
     function handleChange(event) {
         const { name, value } = event.target
         setUser(prevState => {
+            console.log(prevState)
             return {
                 ...prevState,
                 [name]: value
-            }
+            }    
         });
     }
 
@@ -98,7 +84,7 @@ export default function Signup() {
                         <FormItem label="Password" name='password' value={user.password} onChange={(event) => handleChange(event)} />
                         <FormItem label="Confirm Password" name='copassword' value={user.copassword} onChange={(event) => handleChange(event)} />
                         <Button type="submit" className={classes.signUpButton} variant="contained" color="primary"> SIGN UP </Button>
-                        <Button style={{ border: '1px solid #cacaca', backgroundColor: "rgba(206, 200, 200, 0.45)", color: 'black' }} className={classes.signUpButton} variant="contained" color="primary"> LOGIN </Button>
+                        <Button  className={classes.loginButton} variant="contained" color="primary"> LOGIN </Button>
                     </form>
                 </Grid>
             </Grid>

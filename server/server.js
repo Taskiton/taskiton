@@ -3,14 +3,16 @@ var cors = require('cors')
 const User = require("./model/user.model")
 const connection = require ('./config/db.connection')
 
+const dbConnection = connection();
 const app = express();
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(cors())
 app.use(express.static('./public'))
 
-const dbConnection = connection();
+
 
 app.post('/user_create', (req,res) => {
   
