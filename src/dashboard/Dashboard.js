@@ -1,47 +1,32 @@
 import React from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles(theme => ({
+}));
+
 export default function Dashboard() {
-    const mydiv = {
-        position: "absolute",
-        zIndex: 9,
-        backgroundColor: "#f1f1f1",
-        textAlign: "center",
-        border: "1px solid #d3d3d3",
-    };
-    const mydivheader = {
-        padding: 10,
-        cursor: "move",
-        zIndex: 10,
-        backgroundColor: "#2196F3",
-        color: "#fff",
-    }
 
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    let handleMouseDown = (event) => {
-        // get the mouse cursor position at startup:
-        pos3 = event.clientX;
-        pos4 = event.clientY;
-        document.onmousemove = elementDrag;
-    }
-
-    let elementDrag = (event) => {
-        pos1 = pos3 - event.clientX;
-        pos2 = pos4 - event.clientY;
-        pos3 = event.clientX;
-        pos4 = event.clientY;
-        event.target.style.marginTop = (event.target.offsetTop - pos2) + "px";
-        event.target.style.marginLeft = (event.target.offsetLeft - pos1) + "px";
-    }
-
+    const classes = useStyles();
 
     return (
         <div>
-            <div style={mydiv}>
-                <div style={mydivheader} onMouseDown={handleMouseDown}>Click here to move!</div>
-                <p>Move</p>
-                <p>this</p>
-                <p>DIV</p>
-            </div>
+            <Grid container spacing={0}>
+                <Grid style= {{width:"31vw"}}>
+                    <div style= {{"height":50, "backgroundColor":"yellow"}}></div>
+                </Grid>
+                <Grid style= {{width:"31vw"}}>
+                    <div style= {{"height":50, "backgroundColor":"blue"}}></div>
+                </Grid>
+                <Grid style= {{width:"31vw"}}>
+                    <div style= {{"height":50, "backgroundColor":"red"}}></div>
+                </Grid>
+                <Grid style= {{width:"7vw"}}>
+                    <div style= {{"height":"100vh", "backgroundColor":"grey"}}></div>
+                </Grid>
+            </Grid>
         </div>
     );
 }
