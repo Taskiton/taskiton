@@ -26,12 +26,12 @@ export default function LandingPage() {
                         
                     </div>
                 </Grid>
-                {/* <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                     <div className={classes.promo2} style={{ backgroundColor: 'red' }}>Text2</div>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <div className={classes.promo2} style={{ backgroundColor: 'Yellow' }}>Image2</div>
-                </Grid> */}
+                </Grid>
             </Grid>
         </div>
     );
