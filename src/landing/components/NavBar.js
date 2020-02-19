@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: theme.spacing(2),
     paddingRight: '10%',
-    padding: '2vh',
     //Contunie here, its not good for hambuger button
     //   "&:nth-child(1)": {
     //     marginLeft:'20%'
@@ -25,6 +24,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     backgroundColor: '#F76C6C',
     color: 'white',
+    marginTop: -5,
     //Media Query for mobile version
     [theme.breakpoints.down('xs')]: {
       width: '100%',
@@ -90,17 +90,20 @@ export default function NavBar(props) {
           <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
             Pricing
       </Link>
-          <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
+      <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
+            Team
+      </Link>
+      <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
             Contact Us
       </Link>
         </Box>
         <Box component="span" >
 
-          <Link to="/signup" style={{textDecoration:"none"}}>
+          <Link to="/signup" style={{ textDecoration: "none" }}>
             <Button variant="contained" className={classes.buttonStyle} style={{ backgroundColor: '#000000' }}>Signup</Button>
           </Link>
 
-          <Link to="/dashboard" style={{textDecoration:"none"}}>
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
             <Button variant="contained" className={classes.buttonStyle}>
               Dashboard
             </Button>

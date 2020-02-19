@@ -16,9 +16,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: 'right',
     color: theme.palette.text.secondary,
-    height: '8vh',
+    height: '4vh',
     [theme.breakpoints.down('xs')]: {
-      height: '6vh',
+      height: '4vh',
     }
   }
 }));
