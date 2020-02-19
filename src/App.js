@@ -9,6 +9,7 @@ import HamNav from './landing/components/HamNav';
 import LandingPage from './landing/LandingPage';
 import Signup from './signup/Signup';
 import Dashboard from './dashboard/Dashboard';
+import Login from './login/Login';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -46,6 +47,7 @@ function App() {
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/login" component={Login} />
     </Router>
   );
 }
