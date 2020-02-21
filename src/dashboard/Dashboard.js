@@ -1,5 +1,7 @@
 import React from 'react';
 import Kanban from './Kanban';
+import TeamChat from './TeamChat';
+import Announcement from './Announcement';
 import './dashboard.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -46,6 +48,8 @@ export default function Dashboard() {
                     <Kanban/>
                 </Grid>
                 <Grid item className={classes.gridChat}>
+                    <Announcement/>
+                    <TeamChat/>
                 </Grid>
             </Grid>
         </div>
