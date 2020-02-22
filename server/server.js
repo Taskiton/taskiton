@@ -70,6 +70,10 @@ app.get("/", (req,res) =>{
     res.json(user1)
 })
 
+app.get('/dashboard',(req,res) => {
+    console.log('Dashbiard!');
+})
+
 app.listen(3003, () =>{
     console.log("Server is up and Listening on 3003...");
 })
