@@ -1,5 +1,5 @@
 import React from 'react';
-import Kanban from './Kanban';
+import Kanban from './kanban/Kanban';
 import './dashboard.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
