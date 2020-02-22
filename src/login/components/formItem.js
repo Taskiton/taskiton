@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {signupPageStyle} from '../SignupStyle';
+import {loginPageStyle} from '../LoginStyle';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 
-const useStyles = signupPageStyle
+const useStyles = loginPageStyle
 
 export default function FormItem (props){
     const classes = useStyles();

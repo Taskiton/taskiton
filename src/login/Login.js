@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { signupPageStyle } from './SignupStyle';
+import { loginPageStyle } from './LoginStyle';
 import { palette } from '@material-ui/system';
 import Button from '@material-ui/core/Button';
+import {Redirect} from 'react-router';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormItem from './components/formItem'
 import signupLogo from '../images/signupImage.svg'
 
 
-const useStyles = signupPageStyle
+const useStyles = loginPageStyle
 
-export default function Signup() {
+export default function Login() {
 
     const [user, setUser] = useState({
         mail: "",
-        name: "",
-        lastname: "",
-        password: "",
-        copassword: ""
+        password: ""
+
     });
 
     const classes = useStyles();
@@ -33,10 +32,7 @@ export default function Signup() {
         event.preventDefault()
         var data = {
             mail: user.mail,
-            name: user.name,
-            lastname: user.lastname,
             password: user.password,
-            copassword: user.copassword,
         }
         console.log(data);
         fetch("http://localhost:3003/user_create", {
@@ -57,15 +53,11 @@ export default function Signup() {
         }).catch(function (err) {
             console.log(err)
         });
-
-        //Redirect to dashboardPaqe
-        let signUpButton = document.getElementById("submitButton");
-        signUpButton.onclick(alert("Hello World"))
-        console.log(signUpButton);
+        console.log(data);
     }
     function handleChange(event) {
         const { name, value } = event.target
-
+        
         //In progress
         if(name === 'mail'){
             const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -91,14 +83,10 @@ export default function Signup() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <form onSubmit={(event) => handleSubmit(event)} style={frmStyle} noValidate autoComplete="off">
-                        <h1 style={{ textAlign: 'center', fontSize: '2.1em', marginTop: '0', color: 'black' }}>Create Account</h1>
+                        <h1 style={{ textAlign: 'center', fontSize: '2.1em', marginTop: '0', color: 'black' }}>Login To System</h1>
                         <FormItem style={{ marginTop: '1vh' }} label="Email" name='mail' value={user.mail} onChange={(event) => handleChange(event)} />
-                        <FormItem label="First Name" name='name' value={user.name} onChange={(event) => handleChange(event)} />
-                        <FormItem label="Last Name" name='lastname' value={user.lastname} onChange={(event) => handleChange(event)} />
                         <FormItem type='password' label="Password" name='password' value={user.password} onChange={(event) => handleChange(event)} />
-                        <FormItem type='password' label="Confirm Password" name='copassword' value={user.copassword} onChange={(event) => handleChange(event)} />
-                        <Button id="submitButton" type="submit" className={classes.signUpButton} variant="contained" color="primary"> SIGN UP </Button>
-                        <Button id="loginButton" className={classes.loginButton} variant="contained" color="primary"> LOGIN </Button>
+                        <Button  className={classes.loginButton} variant="contained" color="primary" on> LOGIN </Button>
                     </form>
                 </Grid>
             </Grid>

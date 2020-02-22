@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const signupPageStyle = makeStyles(theme => ({
+export const loginPageStyle = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         
@@ -47,11 +47,11 @@ export const signupPageStyle = makeStyles(theme => ({
     },
     loginButton:{
         backgroundColor: '#A8D0E6',
-        width:'45%',
+        width:'65%',
         height: '50px',
-        display: 'inline',
+        display: 'block',
         marginLeft:'auto',
-        marginRight:'1vw',
+        marginRight:'auto',
         marginTop:'3vh',
         '&:hover': {
             backgroundColor: '#86b8d4',
@@ -63,26 +63,6 @@ export const signupPageStyle = makeStyles(theme => ({
             backgroundColor: '#A8D0E6',
             borderColor: '#A8D0E6',
           },
-    },
-    linkStyle: {
-        fontWeight: 'bold',
-        color: 'black',
-        fontSize: '1.1em',
-        textDecoration: 'none',
-        fontFamily: 'sans-serif',
-        position: 'relative',
-        left: '5vw',
-        [theme.breakpoints.between('sm', 'md')]: {
-          marginLeft: theme.spacing(1),
-          position: 'relative',
-          left: '5vw'
-        },
-        [theme.breakpoints.down('sm')]: {
-    
-          position: 'relative',
-          left: '1vw'
-        },
-    
-      }
+    }
    
 }));

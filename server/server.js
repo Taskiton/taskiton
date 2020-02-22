@@ -21,10 +21,8 @@ app.post('/user_create', (req,res) => {
     console.log("Trruying to create a user");
     // const firstName = req.body.name;
     // const lastName = req.body.name;
-    
-    
 
-    dbConnection.query(`INSERT INTO taskiton (email,firstname, lastname, password, confirmpassword) 
+    dbConnection.query(`INSERT INTO user (email, firstname, lastname, pw, confirm_pw) 
     VALUES ("${req.body.mail}","${req.body.name}", "${req.body.lastname}", "${req.body.password}", "${req.body.copassword}")`
     ,(err, results, fields) => {
         if(err){
@@ -40,7 +38,7 @@ app.post('/user_create', (req,res) => {
 
 app.get('/user/:id', (req,res) => {
     console.log("Fetching user with" + req.params.id);
-    dbConnection.query(`SELECT * FROM taskiton WHERE user_id=${req.params.id}` , (err, rows, fieds) => {
+    dbConnection.query(`SELECT * FROM user WHERE user_id=${req.params.id}` , (err, rows, fieds) => {
     if(err){
         console.log("Failed" + err);
         res.end()
@@ -54,7 +52,7 @@ app.get('/user/:id', (req,res) => {
 
 app.get("/users", (req,res) =>{
    
-    dbConnection.query(`SELECT * FROM taskiton` , (err, rows, fieds) => {
+    dbConnection.query(`SELECT * FROM user` , (err, rows, fieds) => {
         if(err){
             console.log("Failed" + err);
             res.end()
@@ -70,6 +68,10 @@ app.get("/", (req,res) =>{
     res.header('Access-Control-Allow-Headers', "*");
     var user1 = new User ("yalcinos", "Yalcin", "Tatar");
     res.json(user1)
+})
+
+app.get('/dashboard',(req,res) => {
+    console.log('Dashbiard!');
 })
 
 app.listen(3003, () =>{
