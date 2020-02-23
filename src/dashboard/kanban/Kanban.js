@@ -73,12 +73,12 @@ export default function Kanban() {
                 }
             });
         }
-        document.body.style.color = "black";
+        //document.body.style.color = "black";
         //Call server to update here
     }
 
     let onDragStart = () => {
-        document.body.style.color = "red";
+        //document.body.style.color = "red";
     }
 
     return (

@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2),
     backgroundColor: '#F76C6C',
     color: 'white',
+    fontSize: '0.5',
     marginTop: -5,
     //Media Query for mobile version
     [theme.breakpoints.down('xs')]: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   linkStyle: {
     fontWeight: 'bold',
     color: 'black',
-    fontSize: '1.1em',
+    fontSize: '1em',
     textDecoration: 'none',
     fontFamily: 'sans-serif',
     position: 'relative',

@@ -1,6 +1,27 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import './task.css';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import IconButton from '@material-ui/core/IconButton';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+    avatar: {
+        color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: '#F76C6C',
+        width: theme.spacing(4),
+        height: theme.spacing(4),
+        marginLeft: 5,
+    },
+}));
 
 export default function Task(props) {
 
@@ -15,20 +36,25 @@ export default function Task(props) {
     let handleClick = () => {
         alert("Task Details");
     };
-
+    const classes = useStyles();
     return (
         <Draggable draggableId={props.task.id} index={props.index}>
             {
-                
+
                 (provided, snapshot) => (
                     <div>
-                        {/* {snapshot.isDragging ? 'blue' : 'white'} */}
-                    <div className="item" 
-                        {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
-                        onClick={handleClick}
-                    >
-                        {props.task.content}
-                    </div>
+                        <div className="item"
+                            {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
+                            onClick={handleClick}
+                        >
+                            <Avatar className={classes.avatar}>H</Avatar>
+                            {/* <Avatar className={classes.avatar} 
+                            style={{backgroundColor:'purple'}}>A</Avatar> */}
+                            <span>{props.task.content}</span>
+                            <IconButton aria-label="More info" color="secondary">
+                                <MoreHorizIcon />
+                            </IconButton>
+                        </div>
                     </div>
                 )
             }

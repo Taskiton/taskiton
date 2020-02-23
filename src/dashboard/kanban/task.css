@@ -1,8 +1,20 @@
 .item {
-    padding: 20px;
-    margin-bottom: 5px;
+    padding: 15px;
+    width: 82%;
+    margin: auto;
+    margin-bottom: 8px;
     background-color: white;
-    font-size: 1.1em;
+    font-size: 1em;
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+    box-shadow: 2px 3px 5px #888888;
+    border-radius: 5%;
+}
+
+.item span {
+    width: 100%;
+    text-align: center;
 }
 
 @media only screen  and (max-width:600px) {

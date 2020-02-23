@@ -3,15 +3,20 @@ import Kanban from './kanban/Kanban';
 import TeamChat from './TeamChat';
 import Announcement from './Announcement';
 import Sample from './Sample';
+import TeamList from './TeamList/TeamList';
 import './dashboard.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     gridTeam: {
-        backgroundColor:"blue",
+        boxShadow: "2px 3px 5px #888888",
         width:"5vw",
-        height:"91vh",        
+        height:"90vh", 
+        display:"flex",
+        borderRadius: "2%",
+        justifyContent: "center",
+        alignItems: "baseline",       
         [theme.breakpoints.down('xs')]: {
             display:"none",
         }
@@ -43,6 +48,7 @@ export default function Dashboard() {
         <div className={classes.root}>
             <Grid container spacing={0}>
                 <Grid item className={classes.gridTeam}>
+                    <TeamList/>
                 </Grid>
                 <Grid item className={classes.gridKanban}>
                 <Kanban/>
