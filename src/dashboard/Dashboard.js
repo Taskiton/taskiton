@@ -2,6 +2,7 @@ import React from 'react';
 import Kanban from './kanban/Kanban';
 import TeamChat from './TeamChat';
 import Announcement from './Announcement';
+import Sample from './Sample';
 import './dashboard.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -15,8 +16,7 @@ const useStyles = makeStyles(theme => ({
             display:"none",
         }
     },
-    gridKanban: {
-        backgroundColor:"red", 
+    gridKanban: { 
         width:"65vw",
         height:"91vh",
         overflow: "auto",
@@ -45,7 +45,7 @@ export default function Dashboard() {
                 <Grid item className={classes.gridTeam}>
                 </Grid>
                 <Grid item className={classes.gridKanban}>
-                    <Kanban/>
+                <Kanban/>
                 </Grid>
                 <Grid item className={classes.gridChat}>
                     <Announcement/>

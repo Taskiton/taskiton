@@ -1,20 +1,42 @@
-.outerDiv {
+.colDiv {
     border: solid red;
-    width: 350px;
-    height: 500px;
-    margin: auto;
-    margin-top: 50px;
+    width: 30%;
     float: left;
-    margin-left: 50px;
+    margin: auto;
+    margin-left: 2%;
+    margin-top: 2%;
+    background-color: cyan;
+}
+
+@media only screen and (max-width: 600px) {
+    .colDiv {
+        width: 95%;
+        height: auto;
+        float: left;
+        margin: auto;
+        margin-left: 2.5%;
+        margin-top: 1%;
+        background-color: cyan;
+    }
 }
 
 h3 {
     text-align: center;
-    padding: 8px;
 }
 
 .taskList {
     text-align: center;
-    padding: 8px;
-    min-height: 500px;
+    padding: 5px;
+    min-height: 80%;
+    height: 75vh;
+    overflow: auto;
+}
+
+@media only screen and (max-width:600px){
+
+    .taskList {
+        height: auto;
+        overflow: auto;
+    }
+    
 }

@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    height: '7vh',
+    height: '56px',
     backgroundColor:'#A8D0E6'
   },
   appBarShift: {

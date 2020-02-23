@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     height: '4vh',
     [theme.breakpoints.down('xs')]: {
-      height: '4vh',
+      height: '56px',
     }
   }
 }));

@@ -12,13 +12,13 @@ export default function Column(props) {
 
     return (
         <div>
-
-            <div className="outerDiv">
-                <h3>
+            <div className="colDiv">
+                <h3> 
+                    {props.column.title}
                     {props.column.title!=='Archive'
                     ?<span onClick={handleAddClick} style={{cursor:"pointer"}}>+</span>
-                    :<span></span>} 
-                    {props.column.title}</h3>
+                    :<span></span>}</h3>
+
                 <Droppable droppableId={props.column.id} direction="vertical">
                     {
                         (provided, snapshot) => (

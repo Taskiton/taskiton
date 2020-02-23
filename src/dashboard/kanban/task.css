@@ -1,9 +1,16 @@
 .item {
-    border: solid black;
-    padding: 8px;
+    padding: 20px;
     margin-bottom: 5px;
     background-color: white;
-    cursor: help;
+    font-size: 1.1em;
+}
+
+@media only screen  and (max-width:600px) {
+
+    .item {
+        padding: 8px;
+        font-size: 1.2em;
+    }
 }
 
 div[data-rbd-drag-handle-context-id] {
