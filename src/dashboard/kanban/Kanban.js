@@ -122,7 +122,7 @@ export default function Kanban() {
         const allTasks = data.tasks;
 
         let numbOfTasks = Object.keys(allTasks).length;
-        const newTaskId = 'task-' + (++numbOfTasks);
+        const newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks-1]).split("-")[1]));
         const newTask = { id: newTaskId, content: val, assignedTo: 'AU' };
         allTasks[newTaskId] = newTask; // update the state
 
