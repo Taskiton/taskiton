@@ -172,8 +172,23 @@ export default function Kanban() {
         setEditColumnId(columnId);
     }
 
-    let handleEditTaskSubmit = () => {
+    //Editing task details
+    let handleEditTaskSubmit = (task, event, _taskId) => {
+        event.preventDefault();
+        
+        const allTasks = data.tasks;
+        allTasks[_taskId] = {id: _taskId, 
+            content: task.taskDetails, 
+            assignedTo: (task.assignedTo).split("")[0].toUpperCase()}
 
+        setData(prevState=>{
+            return{
+                ...prevState,
+                tasks:allTasks,
+            }
+        });
+
+        setmodalStateOpen(false);
     }
 
     //Delete the card
