@@ -33,10 +33,8 @@ export default function Task(props) {
         fontSize: 18,
         // ...provided.draggableProps.style,
     };
-    let handleClick = () => {
-        alert("Task Details");
-    };
     const classes = useStyles();
+
     return (
         <Draggable draggableId={props.task.id} index={props.index}>
             {
@@ -45,9 +43,10 @@ export default function Task(props) {
                     <div>
                         <div className="item"
                             {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
-                            onClick={handleClick}
+                            onClick={()=>{props.handleEditTask(props.task.assignedTo,
+                                props.task.content)}}
                         >
-                            <Avatar className={classes.avatar}>H</Avatar>
+                            <Avatar className={classes.avatar}>{props.task.assignedTo}</Avatar>
                             {/* <Avatar className={classes.avatar} 
                             style={{backgroundColor:'purple'}}>A</Avatar> */}
                             <span>{props.task.content}</span>
