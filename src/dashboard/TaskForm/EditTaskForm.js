@@ -9,15 +9,18 @@ export default function EditTaskForm(props) {
     }
 
     return (
-        <form onSubmit={(event)=>{
-            props.handleAddNewTaskSubmit(taskName, event)
-            }}>
-            <label>
-                Name:
-                <input type="text" value={taskName} onChange={handleChange} />
-            </label>
-            <input type="submit" value="Submit" />
-            <input type="button" value="Delete" />
-        </form>
+        <div>
+            <form onSubmit={(event)=>{
+                props.handleAddNewTaskSubmit(taskName, event)
+                }}>
+                <label>
+                    Name:
+                    <input type="text" value={taskName} onChange={handleChange} />
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+            <input type="button" value="Delete" 
+                onClick={()=>{props.handleEditNewTaskDelete(props.editTaskId)}}/>
+        </div>
     );
 }

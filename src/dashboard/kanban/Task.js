@@ -44,7 +44,7 @@ export default function Task(props) {
                         <div className="item"
                             {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
                             onClick={()=>{props.handleEditTask(props.task.assignedTo,
-                                props.task.content)}}
+                                props.task.content, props.task.id, props.columnId)}}
                         >
                             <Avatar className={classes.avatar}>{props.task.assignedTo}</Avatar>
                             {/* <Avatar className={classes.avatar} 

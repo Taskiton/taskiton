@@ -88,28 +88,32 @@ export default function Kanban() {
     //     setOpen(true);
     // }
 
-    /*****************/
+    /*************************************************************/
+    /*************************************************************/
     // Modal Handle
     const [modalStateOpen, setmodalStateOpen] = useState(false);
 
     const handleModalClose = () => {
         setmodalStateOpen(false);
     }
-    /*****************/
-
+    /*************************************************************/
+    //Could have named the following states better:
     const [currentColumnId, setCurrentColumnId] = useState("");
 
+    const [isItNewTask, setIsItNewTask] = useState(true);
+
+    /*************************************************************/
+    /*************************************************************/
+    //Adding new task
+
     let handleAddNewTask = (colId) => {
+        setIsItNewTask(true);
         setmodalStateOpen(true);
         setCurrentColumnId(colId);
     }
 
-    const [isItNewTask, setIsItNewTask] = useState(true);
-
-    //Adding new task
     let handleAddNewTaskSubmit = (val, event) => {
         event.preventDefault();
-
         if(val.length<1) {
             setmodalStateOpen(false);
             return;
@@ -148,13 +152,58 @@ export default function Kanban() {
 
         setmodalStateOpen(false);
     }
+    /*************************************************************/
 
-    //Handle Task Details
-    let handleEditTask = (asssignedTo, taskDetails) => {
+    /*************************************************************/
+    /*************************************************************/
+
+    const [editAssignedTo, setEditAssignedTo] = useState("");
+    const [editTaskDetails, setEditTaskDetails] = useState("");
+    const [editTaskId, setEditTaskId] = useState("");
+    const [editColumnId, setEditColumnId] = useState("");
+
+    //Edit Task Details
+    let handleEditTask = (asssignedTo, taskDetails, taskId, columnId) => {
         setIsItNewTask(false);
         setmodalStateOpen(true);
-        console.log(asssignedTo+" "+taskDetails);
+        setEditAssignedTo(asssignedTo);
+        setEditTaskDetails(taskDetails);
+        setEditTaskId(taskId);
+        setEditColumnId(columnId);
     }
+
+    let handleEditTaskSubmit = () => {
+
+    }
+
+    //Delete the card
+    let handleEditNewTaskDelete = (_taskId) => {
+        const allTasks = data.tasks;
+        delete allTasks[_taskId];
+
+        const currentColumnTaskIds =  data.columns[editColumnId].taskIds;
+        const indexToDelete =  currentColumnTaskIds.indexOf(_taskId);
+        currentColumnTaskIds.splice(indexToDelete, 1);
+
+        const newColumn = {
+            ...data.columns[editColumnId],
+            taskIds : currentColumnTaskIds
+        }
+
+        setData(prevState=>{
+            return{
+                ...prevState,
+                tasks:allTasks,
+                columns : {
+                    ...prevState.columns,
+                    [editColumnId]: newColumn,
+                }
+            }
+        });
+        setmodalStateOpen(false);
+    }
+
+    /*************************************************************/
 
     return (
         <div>
@@ -172,7 +221,13 @@ export default function Kanban() {
             </DragDropContext>
             <KanbanModal modalStateOpen={modalStateOpen} handleModalClose={handleModalClose}>
                 {isItNewTask?<TaskForm handleAddNewTaskSubmit={handleAddNewTaskSubmit} />
-                :<EditTaskForm/>}
+                :<EditTaskForm 
+                    editAssignedTo = {editAssignedTo}
+                    editTaskDetails = {editTaskDetails}
+                    editTaskId = {editTaskId}
+                    handleEditTaskSubmit={handleEditTaskSubmit}
+                    handleEditNewTaskDelete={handleEditNewTaskDelete}
+                />}
             </KanbanModal>
         </div>
     );

@@ -28,7 +28,8 @@ export default function Column(props) {
                                 {props.tasks.map((task,index) => <Task 
                                 key={task.id} task={task} 
                                 handleEditTask = {props.handleEditTask}
-                                index={index}/>)}
+                                index={index}
+                                columnId={props.column.id}/>)}
                             {provided.placeholder}
                             </div>
                         )
