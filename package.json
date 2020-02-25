@@ -14,6 +14,7 @@
     "express": "^4.17.1",
     "gh-pages": "^2.2.0",
     "mysql": "^2.18.1",
+    "pubnub": "^4.27.3",
     "react": "^16.12.0",
     "react-beautiful-dnd": "^12.2.0",
     "react-dom": "^16.12.0",

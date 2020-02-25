@@ -1,6 +1,6 @@
 import React from 'react';
 import Kanban from './kanban/Kanban';
-import TeamChat from './TeamChat';
+import TeamChat from './TeamChat/Chat';
 import Announcement from './Announcement';
 import Sample from './Sample';
 import TeamList from './TeamList/TeamList';
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     gridKanban: { 
-        width:"65vw",
+        width:"70vw",
         height:"91vh",
         overflow: "auto",
         [theme.breakpoints.down('xs')]: {
@@ -31,11 +31,14 @@ const useStyles = makeStyles(theme => ({
     },
     gridChat: {
         backgroundColor:"yellow", 
-        width:"30vw",
+        width:"25vw",
         height:"91vh",
         [theme.breakpoints.down('xs')]: {
             display:"none",
         }
+    },
+    gridAnnouncement:{
+        height:'50%'
     }
 
 }));
@@ -54,7 +57,7 @@ export default function Dashboard() {
                 <Kanban/>
                 </Grid>
                 <Grid item className={classes.gridChat}>
-                    <Announcement/>
+                    <Announcement className={classes.gridAnnouncement}/>
                     <TeamChat/>
                 </Grid>
             </Grid>
