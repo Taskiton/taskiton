@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import useInput from './InputControl';
 import PubNub from 'pubnub';
-import ApiConfig from '../../config'
+import ApiConfig from '../../config/config'
 import {Card,Chip, Divider, CardActions, CardContent,List, ListItem,Button,Typography,Input} from '@material-ui/core';
 
 
