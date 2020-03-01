@@ -30,9 +30,36 @@ const useStyles = makeStyles(theme => ({
 
   },
   chatAvatar: {
+    backgroundColor: '#e6e6e6',
     height: '7vh',
     overflow:'auto',
-  }
+    marginLeft: '3vw',
+    borderRadius: '10px',
+    boxShadow:'5px 5px 21px -15px rgba(64,56,64,0.69)'
+    
+  },
+  date:{
+    fontSize:'10px',
+    color:'#A9A9A9',
+    marginLeft:'1vw'
+  },
+  chatUsername:{
+    fontWeight:'420',
+    marginLeft:'3vw'
+
+  },
+  mainMessage:{
+     marginTop:'2vh'
+  },
+  avatar: {
+    position: 'absolute',
+    marginTop:'3vh',
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: '#F76C6C',
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  
+}
 }));
 
 // Our main Component, the parent to all the others, the one to rule them all.
@@ -188,24 +215,6 @@ function App() {
      tempMessage.setValue('');
    }
  }
-  // function goBack() {
-  //   //Access the parameters provided in the URL
-  //   let query = window.location.search.substring(1);
-  //   if(!query){
-  //     setChannel("Global")
-  //   }else{
-  //     let params = query.split("&");
-  //     for(let i = 0; i < params.length;i++){
-  //       var pair = params[i].split("=");
-  //       //If the user input a channel then the default channel is now set
-  //       //If not, we still navigate to the default channel.
-  //       if(pair[0] === "channel" && pair[1] !== ""){
-  //           setChannel(decodeURI(pair[1]))
-  //       }
-  //     }
-  //   }
-  // }
-
  
     return(
       <Card >
@@ -268,11 +277,19 @@ function Message(props){
   var messageIndividual = `${boldUsername} - ${props.text}`
   return (
     <div>
-      <ListItemText  secondary={props.date}>  
-      <Chip className={classes.chatAvatar} avatar={<Avatar className={classes.purple}>YT</Avatar>} label={messageIndividual} />
-      </ListItemText>
-      <Divider/>
+      <ListItemText className={classes.mainMessage}>  
+      
+      <Avatar className={classes.avatar}>YT</Avatar>
+      <div>
+      <span className={classes.chatUsername}>{props.uuid}</span>
+      <span className={classes.date}>{ props.date}</span>
+      </div>
      
+      <div>
+      <Chip className={classes.chatAvatar} label={props.text} />
+      </div>
+      </ListItemText>
+    
     </div>
   );
 }
