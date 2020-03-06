@@ -13,7 +13,19 @@ export default function TaskForm(props) {
             props.handleAddNewTaskSubmit(taskName, event)
             }}>
             <label>
-                Name:
+                Task Name:
+                <input type="text" value={taskName} onChange={handleChange} />
+            </label>
+            <label>
+                Task Details:
+                <input type="text" value={taskName} onChange={handleChange} />
+            </label>
+            <label>
+                Assigned to:
+                <input type="text" value={taskName} onChange={handleChange} />
+            </label>
+            <label>
+                Due date:
                 <input type="text" value={taskName} onChange={handleChange} />
             </label>
             <input type="submit" value="Submit" />
