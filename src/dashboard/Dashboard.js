@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     gridChat: {
-        backgroundColor:"yellow", 
+        boxShadow: "2px 3px 5px #888888",
         width:"25vw",
         height:"91vh",
         [theme.breakpoints.down('xs')]: {
@@ -57,7 +57,7 @@ export default function Dashboard() {
                 <Kanban/>
                 </Grid>
                 <Grid item className={classes.gridChat}>
-                    <Announcement className={classes.gridAnnouncement}/>
+                    {/* <Announcement className={classes.gridAnnouncement}/> */}
                     <TeamChat/>
                 </Grid>
             </Grid>

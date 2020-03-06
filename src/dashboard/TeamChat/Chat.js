@@ -38,6 +38,14 @@ const useStyles = makeStyles(theme => ({
     boxShadow:'5px 5px 21px -15px rgba(64,56,64,0.69)'
     
   },
+  messageContainer:{
+    position:'relative',
+    top:'4vh'
+  },
+  chatInfoContainer:{
+    position:'relative',
+    top:'3vh'
+  },
   date:{
     fontSize:'10px',
     color:'#A9A9A9',
@@ -49,6 +57,7 @@ const useStyles = makeStyles(theme => ({
 
   },
   mainMessage:{
+    
      marginTop:'2vh'
   },
   avatar: {
@@ -217,7 +226,7 @@ function App() {
  }
  
     return(
-      <Card >
+      <Card>
           <CardContent>
             <div className="top">
               <Typography variant="h5" inline >
@@ -272,6 +281,10 @@ function Log(props) {
 function Message(props){
   const classes = useStyles();
   let userName = props.uuid;
+  let message = props.text;
+  let breakMessage = message.replace(/(.{5})/g, "$1<br>");
+  console.log(document.getElementById('chip'))
+  // console.log(breakMessage)
   let boldUsername = userName;
 
   var messageIndividual = `${boldUsername} - ${props.text}`
@@ -280,13 +293,13 @@ function Message(props){
       <ListItemText className={classes.mainMessage}>  
       
       <Avatar className={classes.avatar}>YT</Avatar>
-      <div>
+      <div className={classes.chatInfoContainer}>
       <span className={classes.chatUsername}>{props.uuid}</span>
-      <span className={classes.date}>{ props.date}</span>
+      <span className={classes.date}>{props.date}</span>
       </div>
      
-      <div>
-      <Chip className={classes.chatAvatar} label={props.text} />
+      <div className={classes.messageContainer}>
+      <Chip id="chip" className={classes.chatAvatar} label={breakMessage} />
       </div>
       </ListItemText>
     
