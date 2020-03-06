@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import useInput from './InputControl';
 import PubNub from 'pubnub';
-import ApiConfig from '../../config'
+import ApiConfig from '../../config/config'
 import {Card,Chip, Divider, CardActions, CardContent,List, ListItem,Button,Typography,Input} from '@material-ui/core';
 
 
@@ -30,38 +30,55 @@ const useStyles = makeStyles(theme => ({
 
   },
   chatAvatar: {
+    backgroundColor: '#e6e6e6',
     height: '7vh',
-    overflow:'auto'
-  }
+    overflow:'auto',
+    marginLeft: '3vw',
+    borderRadius: '10px',
+    boxShadow:'5px 5px 21px -15px rgba(64,56,64,0.69)'
+    
+  },
+  date:{
+    fontSize:'10px',
+    color:'#A9A9A9',
+    marginLeft:'1vw'
+  },
+  chatUsername:{
+    fontWeight:'420',
+    marginLeft:'3vw'
+
+  },
+  mainMessage:{
+     marginTop:'2vh'
+  },
+  avatar: {
+    position: 'absolute',
+    marginTop:'3vh',
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: '#F76C6C',
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  
+}
 }));
 
 // Our main Component, the parent to all the others, the one to rule them all.
-function App(){
+function App() {
   const classes = useStyles();
   //Set a default channel incase someone navigates to the base url without
   //specificfying a channel name parameter.
   let defaultChannel = "Global";
-  //Access the parameters provided in the URL
-  let query = window.location.search.substring(1);
-  let params = query.split("&");
-  for(let i = 0; i < params.length;i++){
-    var pair = params[i].split("=");
-    //If the user input a channel then the default channel is now set
-    //If not, we still navigate to the default channel.
-    if(pair[0] === "channel" && pair[1] !== ""){
-      defaultChannel = decodeURI(pair[1]);
-    }
-  }
-
+ 
  
   const [channel,setChannel] = useState(defaultChannel);
   const [messages,setMessages] = useState([]);
-  const [username] = useState([UserData.users[0].displayname,Math.floor(Math.random() * 10)].join('-'));
-  // const [username] = useState(['user', new Date().getTime()].join('-'));
-  const tempChannel = useInput();
+  // const [username] = useState([UserData.users[0].displayname,Math.floor(Math.random() * 10)].join('-'));
+  const [username] = useState(UserData.users[1].displayname);
+  // const tempChannel = useInput();
   const tempMessage = useInput();
-  //This is where we set up PubNub and handle events that come through. Reruns on channel name update!
+  //This is where we set up PubNub and handle events that come through. 
   useEffect(()=>{
+    
     console.log("setting up pubnub");
     const pubnub = new PubNub({
       publishKey: ApiConfig.PUBLISHKEY,
@@ -69,7 +86,7 @@ function App(){
       uuid: username
     });
 
-
+    
     pubnub.addListener({
      status: function(statusEvent) {
        if (statusEvent.category === "PNConnectedCategory") {
@@ -90,11 +107,30 @@ function App(){
          });
          setMessages(messages=>messages.concat(newMessages))
        }
-     }
-   });
+     },
+     presence: function(p) {
+      // handle presence
+      var timeout = p.timetoken
+      var occupancy = p.occupancy; // No. of users connected with the channel
+      var state = p.state; // User State
+      var publishTime = p.timestamp; // Publish timetoken
+      var timetoken = p.timeout;  // Current timetoken
+      console.log(occupancy)
+      }
+    });
+
+      pubnub.hereNow({
+        channels: ['Global'],
+        includeUUIDs: true,
+        includeState: true,
+      }, (status, response) => {
+        console.log(response);
+      });
+
      //Subscribes to the channel in our state
      pubnub.subscribe({
-         channels: [channel]
+         channels: [channel],
+         withPresence: true
      });
      pubnub.history(
      {
@@ -124,44 +160,38 @@ function App(){
       setMessages([]);
     }
   },[channel, username]);
-  //Adding back browser button listener
-  useEffect(() => {
-    window.addEventListener("popstate",goBack);
-
-    return function cleanup(){
-      window.removeEventListener("popstate",goBack);
-    }
-  },[]);
+  
 
   function handleKeyDown(event){
     if(event.target.id === "messageInput"){
       if (event.key === 'Enter') {
         publishMessage();
       }
-    }else if(event.target.id === "channelInput"){
-      if (event.key === 'Enter') {
-        //Navigates to new channels
-        const newChannel = tempChannel.value.trim();
-        if(newChannel){
-          if(channel !== newChannel){
-            //If the user isnt trying to navigate to the same channel theyre on
-            setChannel(newChannel);
-            let newURL = window.location.origin + "?channel=" + newChannel;
-            window.history.pushState(null, '',newURL);
-            tempChannel.setValue('');
-          }
-        }else{
-          //If the user didnt put anything into the channel Input
-          if(channel !== "Global"){
-            //If the user isnt trying to navigate to the same channel theyre on
-            setChannel("Global");
-            let newURL = window.location.origin;
-            window.history.pushState(null, '',newURL);
-            tempChannel.setValue('');
-          }
-        }
-      }
     }
+    // else if(event.target.id === "channelInput"){
+    //   if (event.key === 'Enter') {
+    //     //Navigates to new channels
+    //     const newChannel = tempChannel.value.trim();
+    //     if(newChannel){
+    //       if(channel !== newChannel){
+    //         //If the user isnt trying to navigate to the same channel theyre on
+    //         setChannel(newChannel);
+    //         let newURL = window.location.origin + "?channel=" + newChannel;
+    //         window.history.pushState(null, '',newURL);
+    //         tempChannel.setValue('');
+    //       }
+    //     }else{
+    //       //If the user didnt put anything into the channel Input
+    //       if(channel !== "Global"){
+    //         //If the user isnt trying to navigate to the same channel theyre on
+    //         setChannel("Global");
+    //         let newURL = window.location.origin;
+    //         window.history.pushState(null, '',newURL);
+    //         tempChannel.setValue('');
+    //       }
+    //     }
+    //   }
+    // }
 
   }
 
@@ -185,41 +215,14 @@ function App(){
      tempMessage.setValue('');
    }
  }
-  function goBack() {
-    //Access the parameters provided in the URL
-    let query = window.location.search.substring(1);
-    if(!query){
-      setChannel("Global")
-    }else{
-      let params = query.split("&");
-      for(let i = 0; i < params.length;i++){
-        var pair = params[i].split("=");
-        //If the user input a channel then the default channel is now set
-        //If not, we still navigate to the default channel.
-        if(pair[0] === "channel" && pair[1] !== ""){
-            setChannel(decodeURI(pair[1]))
-        }
-      }
-    }
-  }
-
  
     return(
       <Card >
           <CardContent>
             <div className="top">
               <Typography variant="h5" inline >
-                Chat Application
+                Group Chat
                 </Typography>
-              {/* <Input
-                style={{width:'100px'}}
-                className="channel"
-                id="channelInput"
-                onKeyDown={handleKeyDown}
-                placeholder ={channel}
-                onChange = {tempChannel.onChange}
-                value={tempChannel.value}
-              /> */}
             </div>
             <div >
               
@@ -268,14 +271,25 @@ function Log(props) {
 //Our message functional component that formats each message.
 function Message(props){
   const classes = useStyles();
-  var messageIndividual = `${props.uuid} - ${props.text}`
+  let userName = props.uuid;
+  let boldUsername = userName;
+
+  var messageIndividual = `${boldUsername} - ${props.text}`
   return (
     <div>
-      <ListItemText  secondary={props.date}>  
-      <Chip className={classes.chatAvatar} avatar={<Avatar className={classes.purple}>YT</Avatar>} label={messageIndividual} />
-      </ListItemText>
-      <Divider/>
+      <ListItemText className={classes.mainMessage}>  
+      
+      <Avatar className={classes.avatar}>YT</Avatar>
+      <div>
+      <span className={classes.chatUsername}>{props.uuid}</span>
+      <span className={classes.date}>{ props.date}</span>
+      </div>
      
+      <div>
+      <Chip className={classes.chatAvatar} label={props.text} />
+      </div>
+      </ListItemText>
+    
     </div>
   );
 }
