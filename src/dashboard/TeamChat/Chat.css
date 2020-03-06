@@ -9,4 +9,11 @@
       flex-direction: row;
       justify-content: space-between;
   }
+  .MuiCard-root{
+    box-shadow:5px 5px 21px -15px rgba(64,56,64,0.69);
+    position: relative;
+    top: 15vh;
+    margin: auto;
+    height: 90% !important;
+  }
   
