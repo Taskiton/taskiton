@@ -43,13 +43,19 @@ export default function Task(props) {
                     <div>
                         <div className="item"
                             {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}
-                            onClick={()=>{props.handleEditTask(props.task.assignedTo,
-                                props.task.content, props.task.id, props.columnId)}}
+                            onClick={()=>{props.handleEditTask(props.task, props.columnId)}}
                         >
                             <Avatar className={classes.avatar}>{props.task.assignedTo}</Avatar>
                             {/* <Avatar className={classes.avatar} 
                             style={{backgroundColor:'purple'}}>A</Avatar> */}
-                            <span>{props.task.content}</span>
+                            <div className='taskName'>
+                                <div>
+                                    <span>{props.task.taskName}</span>
+                                </div>
+                                <div>
+                                    <span style={{fontSize: '0.7em'}}>{props.task.dueDate}</span>
+                                </div>
+                            </div>
                             <IconButton aria-label="More info" color="secondary">
                                 <MoreHorizIcon />
                             </IconButton>

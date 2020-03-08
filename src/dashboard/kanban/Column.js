@@ -12,7 +12,7 @@ export default function Column(props) {
             <div className="colDiv">
                 <p className="colTitle"> 
                     {props.column.title}
-                    {props.column.title!=='Archive'
+                    {props.column.title=='All tasks'
                     ?<span onClick={props.handleAddNewTask} style={{cursor:"pointer"}}>
                         <IconButton aria-label="Add"  style={{padding:0, position:"absolute", marginLeft:5}}>
                             <AddCircleIcon/>

@@ -114,7 +114,7 @@ export default function Kanban() {
 
     let handleAddNewTaskSubmit = (val, event) => {
         event.preventDefault();
-        if(val.length<1) {
+        if(val.taskName.length<1) {
             setmodalStateOpen(false);
             return;
         }
@@ -123,7 +123,12 @@ export default function Kanban() {
 
         let numbOfTasks = Object.keys(allTasks).length;
         const newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks-1]).split("-")[1]));
-        const newTask = { id: newTaskId, content: val, assignedTo: 'AU' };
+        const newTask = { id: newTaskId, 
+            taskName: val.taskName, 
+            details:val.taskDetails,
+            assignedTo: val.assignedTo,
+            dueDate:val.dueDate,
+         };
         allTasks[newTaskId] = newTask; // update the state
 
         //Updating the column
@@ -157,18 +162,14 @@ export default function Kanban() {
     /*************************************************************/
     /*************************************************************/
 
-    const [editAssignedTo, setEditAssignedTo] = useState("");
     const [editTaskDetails, setEditTaskDetails] = useState("");
-    const [editTaskId, setEditTaskId] = useState("");
     const [editColumnId, setEditColumnId] = useState("");
 
     //Edit Task Details
-    let handleEditTask = (asssignedTo, taskDetails, taskId, columnId) => {
+    let handleEditTask = (task, columnId) => {
         setIsItNewTask(false);
         setmodalStateOpen(true);
-        setEditAssignedTo(asssignedTo);
-        setEditTaskDetails(taskDetails);
-        setEditTaskId(taskId);
+        setEditTaskDetails(task);
         setEditColumnId(columnId);
     }
 
@@ -178,8 +179,11 @@ export default function Kanban() {
         
         const allTasks = data.tasks;
         allTasks[_taskId] = {id: _taskId, 
-            content: task.taskDetails, 
-            assignedTo: (task.assignedTo).split("")[0].toUpperCase()}
+            taskName: task.taskName,
+            details: task.taskDetails,
+            assignedTo: task.assignedTo,
+            dueDate: task.dueDate
+        }
 
         setData(prevState=>{
             return{
@@ -237,9 +241,7 @@ export default function Kanban() {
             <KanbanModal modalStateOpen={modalStateOpen} handleModalClose={handleModalClose}>
                 {isItNewTask?<TaskForm handleAddNewTaskSubmit={handleAddNewTaskSubmit} />
                 :<EditTaskForm 
-                    editAssignedTo = {editAssignedTo}
-                    editTaskDetails = {editTaskDetails}
-                    editTaskId = {editTaskId}
+                    task = {editTaskDetails}
                     handleEditTaskSubmit={handleEditTaskSubmit}
                     handleEditNewTaskDelete={handleEditNewTaskDelete}
                 />}
