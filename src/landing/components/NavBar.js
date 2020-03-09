@@ -89,7 +89,7 @@ export default function NavBar(props) {
             Home
       </Link>
           
-          <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
+          <Link to="/team" style={linkStyle} className={classes.linkStyle}>
             Team
       </Link>
           <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
