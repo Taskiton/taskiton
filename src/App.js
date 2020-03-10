@@ -10,6 +10,8 @@ import LandingPage from './landing/LandingPage';
 import Signup from './signup/Signup';
 import Dashboard from './dashboard/Dashboard';
 import Login from './login/Login';
+import Analytics from './Analytics/Analytics';
+import Team from './Team/Team';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -48,6 +50,8 @@ function App() {
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/team" component={Team} />
+      <Route exact path="/analytics" component={Analytics} />
     </Router>
   );
 }

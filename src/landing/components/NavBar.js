@@ -88,14 +88,15 @@ export default function NavBar(props) {
           <Link to="/" style={linkStyle} className={classes.linkStyle}>
             Home
       </Link>
-          <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
-            Pricing
-      </Link>
-      <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
+          
+          <Link to="/team" style={linkStyle} className={classes.linkStyle}>
             Team
       </Link>
-      <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
+          <Link href="#" onClick={preventDefault} style={linkStyle} className={classes.linkStyle}>
             Contact Us
+      </Link>
+      <Link to="/analytics" style={linkStyle} className={classes.linkStyle}>
+            Analytics
       </Link>
         </Box>
         <Box component="span" >
