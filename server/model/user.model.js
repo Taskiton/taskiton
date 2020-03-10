@@ -1,10 +1,10 @@
-const express = require("express");
+const faker = require('faker');
 
 class Users {
-    constructor(username,firstName,lastName){
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    constructor(){
+        this.username = faker.internet.userName();
+        this.firstName = faker.name.firstName();
+        this.lastName = faker.name.lastName();
     }
 }
 
