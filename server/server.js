@@ -1,5 +1,6 @@
 const express = require('express');
 var cors = require('cors')
+const http = require('http');
 const faker = require('faker');
 const User = require("./model/user.model")
 const connection = require ('./config/db.connection')
@@ -43,13 +44,13 @@ app.post('/user_create_faker', (req,res) => {
 
 app.post('/user_create', (req,res) => {
   
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', 'http://api.taskiton.wmdd.ca');
     res.header('Access-Control-Allow-Headers: Content-Type');
     console.log("Trruying to create a user");
     // const firstName = req.body.name;
     // const lastName = req.body.name;
 
-    dbConnection.query(`INSERT INTO user (email, firstname, lastname, pw, confirm_pw) 
+    dbConnection.query(`INSERT INTO users (email, firstname, lastname, pw, confirm_pw) 
     VALUES ("${req.body.mail}","${req.body.name}", "${req.body.lastname}", "${req.body.password}", "${req.body.copassword}")`
     ,(err, results, fields) => {
         if(err){
@@ -65,7 +66,7 @@ app.post('/user_create', (req,res) => {
 
 app.get('/user/:id', (req,res) => {
     console.log("Fetching user with" + req.params.id);
-    dbConnection.query(`SELECT * FROM user WHERE user_id=${req.params.id}` , (err, rows, fieds) => {
+    dbConnection.query(`SELECT * FROM users WHERE user_id=${req.params.id}` , (err, rows, fieds) => {
     if(err){
         console.log("Failed" + err);
         res.end()
@@ -101,6 +102,8 @@ app.get('/dashboard',(req,res) => {
     console.log('Dashbiard!');
 })
 
-app.listen(3003, () =>{
+
+
+app.listen(3305, () =>{
     console.log("Server is up and Listening on 3003...");
 })
