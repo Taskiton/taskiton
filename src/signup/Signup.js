@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { signupPageStyle } from './SignupStyle';
 import { palette } from '@material-ui/system';
 import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormItem from './components/formItem'
@@ -12,6 +13,7 @@ const useStyles = signupPageStyle
 
 export default function Signup() {
 
+    let history = useHistory();
     const [user, setUser] = useState({
         mail: "",
         name: "",
@@ -30,6 +32,7 @@ export default function Signup() {
     }
 
     function handleSubmit(event) {
+        
         event.preventDefault()
         var data = {
             mail: user.mail,
@@ -38,30 +41,29 @@ export default function Signup() {
             password: user.password,
             copassword: user.copassword,
         }
-        console.log(data);
-        fetch("http://localhost:3003/user_create", {
+        // console.log(data);
+        const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+        const url = 'http://api.taskiton.wmdd.ca/user_create';
+        fetch(proxyurl + url, {
             method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }).then(function (response) {
             if (response.status >= 400) {
                 throw new Error("Bad response from server");
             }
-            return response.json();
+            // console.log(response)
+            // return response.json();
         }).then(function (data) {
-            console.log(data);
+            // console.log(data);
+            history.push("/dashboard");
             if (data == "success") {
-
+                console.log("Success");
             }
         }).catch(function (err) {
             console.log(err)
         });
-
-        //Redirect to dashboardPaqe
-        let signUpButton = document.getElementById("submitButton");
-        signUpButton.onclick(alert("Hello World"))
-        console.log(signUpButton);
     }
     function handleChange(event) {
         const { name, value } = event.target

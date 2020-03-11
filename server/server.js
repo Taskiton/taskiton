@@ -64,6 +64,48 @@ app.post('/user_create', (req,res) => {
 
 })
 
+//LOGIN CHECK
+app.post('/user', (req,res) => {
+    res.header('Access-Control-Allow-Origin', 'http://api.taskiton.wmdd.ca');
+    res.header('Access-Control-Allow-Headers: Content-Type');
+    var email= req.body.email;
+    var password = req.body.password;
+    dbConnection.query(`SELECT * FROM users WHERE email= ?`,[email]
+    ,(err, results, fields) => {
+        if(err){
+            console.log("Failed" + err);
+            res.send({
+                "code":400,
+                "failed":"error ocurred"
+              })
+            res.end()
+            return
+        }else {
+           console.log('The solution is: ', results);
+           if(results.length > 0 ){
+               if(results[0].pw === password){
+                res.send({
+                    "code":200,
+                    "success":"login sucessfull"
+                      });
+               }else{
+                res.send({
+                    "code":204,
+                    "success":"Email and password does not match"
+                      });
+               }
+           }else {
+            res.send({
+                "code":204,
+                "success":"Email does not exits"
+                  });
+           }
+        //    console.log(results[0].pw);
+        //     res.json(results);
+        }
+    })
+
+})
 app.get('/user/:id', (req,res) => {
     console.log("Fetching user with" + req.params.id);
     dbConnection.query(`SELECT * FROM users WHERE user_id=${req.params.id}` , (err, rows, fieds) => {

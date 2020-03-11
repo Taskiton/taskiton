@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { loginPageStyle } from './LoginStyle';
 import { palette } from '@material-ui/system';
+import { useHistory } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import {Redirect} from 'react-router';
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +13,8 @@ import signupLogo from '../images/signupImage.svg'
 const useStyles = loginPageStyle
 
 export default function Login() {
-
+    
+    let history = useHistory();
     const [user, setUser] = useState({
         mail: "",
         password: ""
@@ -31,41 +33,45 @@ export default function Login() {
     function handleSubmit(event) {
         event.preventDefault()
         var data = {
-            mail: user.mail,
+            email: user.mail,
             password: user.password,
         }
         console.log(data);
-        fetch("http://localhost:3003/user_create", {
+        const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+        const url = 'http://api.taskiton.wmdd.ca/user';
+        fetch(proxyurl + url, {
             method: 'POST',
-            mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }).then(function (response) {
+            // console.log(response.status)
             if (response.status >= 400) {
                 throw new Error("Bad response from server");
-            }
+            } 
             return response.json();
-        }).then(function (data) {
-            console.log(data);
-            if (data == "success") {
-
+        }).then(function (result) {
+            console.log(result);
+            if(result.code === 204){
+                alert(result.success);
+            }else if (result.code === 200){
+                history.push("/dashboard");
             }
         }).catch(function (err) {
             console.log(err)
         });
-        console.log(data);
     }
+
     function handleChange(event) {
         const { name, value } = event.target
         
-        //In progress
-        if(name === 'mail'){
-            const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-             if(!validEmailRegex.test(value)){
-                // console.log(FormItem().formIte)
-                console.log('This is not email Adress');
-             }
-        }
+        // //In progress
+        // if(name === 'mail'){
+        //     const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+        //      if(!validEmailRegex.test(value)){
+        //         // console.log(FormItem().formIte)
+        //         console.log('This is not email Adress');
+        //      }
+        // }
         setUser(prevState => {
             // console.log(prevState)
             return {
@@ -86,7 +92,7 @@ export default function Login() {
                         <h1 style={{ textAlign: 'center', fontSize: '2.1em', marginTop: '0', color: 'black' }}>Login To System</h1>
                         <FormItem style={{ marginTop: '1vh' }} label="Email" name='mail' value={user.mail} onChange={(event) => handleChange(event)} />
                         <FormItem type='password' label="Password" name='password' value={user.password} onChange={(event) => handleChange(event)} />
-                        <Button  className={classes.loginButton} variant="contained" color="primary" on> LOGIN </Button>
+                        <Button  type='submit' className={classes.loginButton} variant="contained" color="primary" on> LOGIN </Button>
                     </form>
                 </Grid>
             </Grid>
