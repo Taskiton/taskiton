@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import initialData from './initialData';
+import React, { useState, useEffect } from 'react';
+import { initialData } from './HandleKanbanData';
 import Column from './Column';
 import { DragDropContext } from "react-beautiful-dnd";
 import KanbanModal from '../Modal/Modal';
@@ -7,7 +7,17 @@ import TaskForm from '../TaskForm/TaskForm';
 import EditTaskForm from '../TaskForm/EditTaskForm';
 
 export default function Kanban() {
-    const [data, setData] = useState(initialData);
+
+    const [data, setData] = useState(null);
+    //Fetch initial data
+    useEffect(() => {
+
+        let promise =fetchInitialData();
+
+        promise.then( result => {
+            setData(initialData);
+        });
+    }, []);
 
     let onDragEnd = (result) => {
         console.log(result);
@@ -114,7 +124,7 @@ export default function Kanban() {
 
     let handleAddNewTaskSubmit = (val, event) => {
         event.preventDefault();
-        if(val.taskName.length<1) {
+        if (val.taskName.length < 1) {
             setmodalStateOpen(false);
             return;
         }
@@ -122,13 +132,14 @@ export default function Kanban() {
         const allTasks = data.tasks;
 
         let numbOfTasks = Object.keys(allTasks).length;
-        const newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks-1]).split("-")[1]));
-        const newTask = { id: newTaskId, 
-            taskName: val.taskName, 
-            details:val.taskDetails,
+        const newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]));
+        const newTask = {
+            id: newTaskId,
+            taskName: val.taskName,
+            details: val.taskDetails,
             assignedTo: val.assignedTo,
-            dueDate:val.dueDate,
-         };
+            dueDate: val.dueDate,
+        };
         allTasks[newTaskId] = newTask; // update the state
 
         //Updating the column
@@ -146,7 +157,7 @@ export default function Kanban() {
         setData(prevState => {
             return {
                 ...prevState,
-                tasks:allTasks,
+                tasks: allTasks,
                 columns: {
                     ...prevState.columns,
                     [currentColumnId]: updatedColumn,
@@ -176,19 +187,20 @@ export default function Kanban() {
     //Editing task details
     let handleEditTaskSubmit = (task, event, _taskId) => {
         event.preventDefault();
-        
+
         const allTasks = data.tasks;
-        allTasks[_taskId] = {id: _taskId, 
+        allTasks[_taskId] = {
+            id: _taskId,
             taskName: task.taskName,
             details: task.taskDetails,
             assignedTo: task.assignedTo,
             dueDate: task.dueDate
         }
 
-        setData(prevState=>{
-            return{
+        setData(prevState => {
+            return {
                 ...prevState,
-                tasks:allTasks,
+                tasks: allTasks,
             }
         });
 
@@ -200,20 +212,20 @@ export default function Kanban() {
         const allTasks = data.tasks;
         delete allTasks[_taskId];
 
-        const currentColumnTaskIds =  data.columns[editColumnId].taskIds;
-        const indexToDelete =  currentColumnTaskIds.indexOf(_taskId);
+        const currentColumnTaskIds = data.columns[editColumnId].taskIds;
+        const indexToDelete = currentColumnTaskIds.indexOf(_taskId);
         currentColumnTaskIds.splice(indexToDelete, 1);
 
         const newColumn = {
             ...data.columns[editColumnId],
-            taskIds : currentColumnTaskIds
+            taskIds: currentColumnTaskIds
         }
 
-        setData(prevState=>{
-            return{
+        setData(prevState => {
+            return {
                 ...prevState,
-                tasks:allTasks,
-                columns : {
+                tasks: allTasks,
+                columns: {
                     ...prevState.columns,
                     [editColumnId]: newColumn,
                 }
@@ -222,7 +234,52 @@ export default function Kanban() {
         setmodalStateOpen(false);
     }
 
+    let fetchInitialData = () => {
+        return new Promise((resolve, reject) => {
+            const url = 'http://localhost:3000/tasks';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    Object.keys(data).map(task => {
+                        initialData.tasks = {
+                            ...initialData.tasks,
+                            [task] : {
+                                id: data[task].task_id,
+                                taskName: data[task].task_name,
+                                assignedTo: data[task].user_name.charAt(0),
+                                details: data[task].task_details,
+                                dueDate: data[task].due_date
+                            }
+                        }
+                    })
+                    fetch("http://localhost:3000/columnmapping")
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data)
+                            resolve("Promise resolved successfully");
+                        else
+                            reject(Error("Promise rejected"));
+                        Object.keys(data).map(column=>{
+                            initialData.columns = {
+                                ...initialData.columns,
+                                [column] : {
+                                    ...initialData.columns[column],
+                                    taskIds : data[column]
+                                }
+                            }
+                        })   
+                    })
+                    
+                    console.log(initialData);
+                })
+
+        })
+    }
+
     /*************************************************************/
+    if (!data) {
+        return <div />
+    }
 
     return (
         <div>
@@ -233,19 +290,20 @@ export default function Kanban() {
 
                     return (
                         <Column key={column.id} column={column} tasks={tasks}
-                            handleAddNewTask={() => { handleAddNewTask(column.id) }} 
-                            handleEditTask={handleEditTask}/>
+                            handleAddNewTask={() => { handleAddNewTask(column.id) }}
+                            handleEditTask={handleEditTask} />
                     )
                 })}
             </DragDropContext>
             <KanbanModal modalStateOpen={modalStateOpen} handleModalClose={handleModalClose}>
-                {isItNewTask?<TaskForm handleAddNewTaskSubmit={handleAddNewTaskSubmit} />
-                :<EditTaskForm 
-                    task = {editTaskDetails}
-                    handleEditTaskSubmit={handleEditTaskSubmit}
-                    handleEditNewTaskDelete={handleEditNewTaskDelete}
-                />}
+                {isItNewTask ? <TaskForm handleAddNewTaskSubmit={handleAddNewTaskSubmit} />
+                    : <EditTaskForm
+                        task={editTaskDetails}
+                        handleEditTaskSubmit={handleEditTaskSubmit}
+                        handleEditNewTaskDelete={handleEditNewTaskDelete}
+                    />}
             </KanbanModal>
         </div>
     );
 }
+

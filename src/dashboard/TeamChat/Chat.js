@@ -133,7 +133,7 @@ function App() {
         includeUUIDs: true,
         includeState: true,
       }, (status, response) => {
-        console.log(response);
+        //console.log(response);
       });
 
      //Subscribes to the channel in our state
@@ -283,7 +283,7 @@ function Message(props){
   let userName = props.uuid;
   let message = props.text;
   let breakMessage = message.replace(/(.{5})/g, "$1<br>");
-  console.log(document.getElementById('chip'))
+  //console.log(document.getElementById('chip'))
   // console.log(breakMessage)
   let boldUsername = userName;
 
