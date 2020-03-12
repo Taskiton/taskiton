@@ -232,11 +232,13 @@ export default function Kanban() {
             }
         });
         setmodalStateOpen(false);
+        
     }
 
     let fetchInitialData = () => {
         return new Promise((resolve, reject) => {
-            const url = 'http://localhost:3000/tasks';
+            const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+            const url = 'http://api.taskiton.wmdd.ca/tasks';
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -252,10 +254,11 @@ export default function Kanban() {
                             }
                         }
                     })
-                    fetch("http://localhost:3000/columnmapping")
+                    fetch("http://api.taskiton.wmdd.ca/columnmapping")
                     .then(response => response.json())
                     .then(data => {
                         if (data)
+                        
                             resolve("Promise resolved successfully");
                         else
                             reject(Error("Promise rejected"));
@@ -269,8 +272,7 @@ export default function Kanban() {
                             }
                         })   
                     })
-                    
-                    console.log(initialData);
+                    //console.log(initialData);
                 })
 
         })
