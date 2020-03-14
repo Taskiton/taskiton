@@ -34,7 +34,7 @@ export default function Kanban() {
         }
 
         if (source.droppableId === destination.droppableId) {
-            console.log("Moving in the same column");
+            //console.log("Moving in the same column");
             const column = data.columns[source.droppableId];
             const newTaskIds = Array.from(column.taskIds);
             newTaskIds.splice(source.index, 1);
@@ -56,7 +56,7 @@ export default function Kanban() {
             }
             );
         } else if (destination !== null) {
-            console.log("Moving to new column");
+            //console.log("Moving to new column");
             const sourceColumn = data.columns[source.droppableId];
             const newSourceTaskIds = sourceColumn.taskIds;
             newSourceTaskIds.splice(source.index, 1);
@@ -85,6 +85,7 @@ export default function Kanban() {
 
                 }
             });
+            moveTaskToNewColumn(draggableId, destination);
         }
         //document.body.style.color = "black";
         //Call server to update here
@@ -97,6 +98,32 @@ export default function Kanban() {
     // let handleAddNewTask = () => {
     //     setOpen(true);
     // }
+
+    let moveTaskToNewColumn = (_taskId, _columnId) =>{
+        var data = {
+            taskId: _taskId,
+            columnId: _columnId.droppableId.split('-')[1],
+        }
+        let url = "http://localhost:3000/movetask";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try moving again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try moving again");
+            console.log(err)
+        });
+    }
 
     /*************************************************************/
     /*************************************************************/
@@ -130,14 +157,23 @@ export default function Kanban() {
         }
 
         const allTasks = data.tasks;
-
+        
         let numbOfTasks = Object.keys(allTasks).length;
-        const newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]));
+        let newTaskId = '';
+        if(numbOfTasks>0) {
+            newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]));
+        } else {
+            newTaskId = 'task-1';
+        }
+        
+        let assignedUser = "";
+        if(val.assignedTo)
+            assignedUser=val.assignedTo.split(" ")[0].split("")[0]+val.assignedTo.split(" ")[1].split("")[0];
         const newTask = {
             id: newTaskId,
             taskName: val.taskName,
             details: val.taskDetails,
-            assignedTo: val.assignedTo,
+            assignedTo: assignedUser,
             dueDate: val.dueDate,
         };
         allTasks[newTaskId] = newTask; // update the state
@@ -165,8 +201,37 @@ export default function Kanban() {
             }
         }
         );
-
+        addNewTaskToDb(newTask, val.assignedTo);
         setmodalStateOpen(false);
+    }
+
+    let addNewTaskToDb = (newTask, assignedUser)=> {
+        
+        var data = {
+            ...newTask,
+            assignedTo:assignedUser,
+            columnId: 1,
+        }
+        console.log(data);
+        let url = "http://localhost:3000/tasks";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
     }
     /*************************************************************/
 
@@ -205,8 +270,37 @@ export default function Kanban() {
         });
 
         setmodalStateOpen(false);
+        editTaskFromDb(allTasks[_taskId]);
     }
 
+    let editTaskFromDb = (_task)=> {
+        var data = {
+            task : _task
+        }
+
+        let url = "http://localhost:3000/tasks";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
+    }
+
+    /*************************************************************/
+    /*************************************************************/
     //Delete the card
     let handleEditNewTaskDelete = (_taskId) => {
         const allTasks = data.tasks;
@@ -232,13 +326,42 @@ export default function Kanban() {
             }
         });
         setmodalStateOpen(false);
-        
+        deleteTaskFromDb(_taskId)
     }
 
+    let deleteTaskFromDb = (_taskId)=> {
+        
+        var data = {
+            task_id : _taskId
+        }
+
+        let url = "http://localhost:3000/tasks";
+        fetch(url, {
+            method: 'DELETE',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
+    }
+
+    /*************************************************************/
+    /*************************************************************/
     let fetchInitialData = () => {
         return new Promise((resolve, reject) => {
             const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-            const url = 'http://api.taskiton.wmdd.ca/tasks';
+            const url = 'http://localhost:3000/tasks';
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -248,13 +371,13 @@ export default function Kanban() {
                             [task] : {
                                 id: data[task].task_id,
                                 taskName: data[task].task_name,
-                                assignedTo: data[task].user_name.charAt(0),
+                                assignedTo: data[task].user_name.split(" ")[0][0] + data[task].user_name.split(" ")[1][0],
                                 details: data[task].task_details,
                                 dueDate: data[task].due_date
                             }
                         }
                     })
-                    fetch("http://api.taskiton.wmdd.ca/columnmapping")
+                    fetch("http://localhost:3000/columnmapping")
                     .then(response => response.json())
                     .then(data => {
                         if (data)

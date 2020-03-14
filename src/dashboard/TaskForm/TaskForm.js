@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
@@ -19,8 +19,30 @@ export default function TaskForm(props) {
         taskName: "",
         taskDetails: "",
         assignedTo: "",
-        dueDate: ""
+        dueDate: "",
     });
+
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        let url = "http://localhost:3000/users";
+        fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' }
+        }).then(response => {
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            setUsers(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
+    }, [])
 
     let handleChange = (event) => {
         const { name, value } = event.target;
@@ -39,7 +61,7 @@ export default function TaskForm(props) {
             <div>
                 <TextField id="standard-secondary" label="Task Name" color="primary"
                     value={task.taskName} onChange={handleChange} className={classes.textField}
-                    name='taskName' />
+                    name='taskName' required/>
             </div>
             <div>
                 {/* <InputLabel id="demo-simple-select-label" style={{paddingTop:'5%'}}>Task Details</InputLabel> */}
@@ -48,24 +70,25 @@ export default function TaskForm(props) {
                 name='taskDetails'/>
             </div>
             <div>
-                <InputLabel id="demo-simple-select-label" style={{paddingTop:'5%'}}>Assign To</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{paddingTop:'5%'}}>Assign To</InputLabel >
                 <Select
+                    native
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={task.assignedTo}
                     onChange={handleChange}
-                    name='assignedTo'
-                >
-                    <MenuItem value={"AU"}>Arsh</MenuItem>
-                    <MenuItem value={"YT"}>Yalcin</MenuItem>
-                    <MenuItem value={"BK"}>Bhinder</MenuItem>
+                    name='assignedTo' 
+                required>
+                    <option value="" hidden>Select a user</option>
+                    {users.map(user=> <option value={user.name}>{(user.name).split(" ")[0]}</option>
+                    )}
                 </Select>
             </div>
             <div>
-                <TextField id="standard-secondary" color="primary"
+                <TextField id="datetime-local" color="primary"
                     value={task.dueDate} onChange={handleChange} className={classes.textField}
                     name='dueDate' 
-                    type="date"
+                    type="datetime-local"
                     defaultValue="2017-05-24"
                     style={{paddingTop:'10%'}}/>
             </div>

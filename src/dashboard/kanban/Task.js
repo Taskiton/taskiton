@@ -53,7 +53,9 @@ export default function Task(props) {
                                     <span>{props.task.taskName}</span>
                                 </div>
                                 <div>
-                                    <span style={{fontSize: '0.7em'}}>{props.task.dueDate}</span>
+                                    <span style={{fontSize: '0.7em'}}>
+                                        {props.task.dueDate?<span>Due:</span>:""}
+                                        {props.task.dueDate}</span>
                                 </div>
                             </div>
                             <IconButton aria-label="More info" color="secondary">
