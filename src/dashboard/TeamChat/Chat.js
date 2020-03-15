@@ -85,9 +85,34 @@ function App() {
   const [username] = useState(UserData.users[1].displayname);
   // const tempChannel = useInput();
   const tempMessage = useInput();
+
+  function getUserListFromAPI(){
+
+        const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+        const url = 'http://api.taskiton.wmdd.ca/users';
+        fetch(url, {
+            headers: { 'Content-Type': 'application/json' },
+
+        }).then(function (response) {
+            // console.log(response.status)
+            if (response.status >= 400) {
+                throw new Error("Bad response from server");
+            } 
+            return response.json();
+        }).then(function (result) {
+            console.log(result);
+            if(result.code === 204){
+                alert(result.success);
+            }else if (result.code === 200){
+               
+            }
+        }).catch(function (err) {
+            console.log(err)
+        });
+  }
   //This is where we set up PubNub and handle events that come through. 
   useEffect(()=>{
-    
+    getUserListFromAPI();
     console.log("setting up pubnub");
     const pubnub = new PubNub({
       publishKey: ApiConfig.PUBLISHKEY,

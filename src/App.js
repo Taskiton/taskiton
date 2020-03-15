@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
 function App() {
 
   const classes = useStyles();
-
+  const [login,setLogin] = useState({check:'false'});
+  
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {

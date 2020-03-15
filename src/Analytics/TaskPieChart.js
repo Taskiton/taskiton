@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Chart from "react-google-charts";
-
+import { Doughnut } from 'react-chartjs-2';
 const pieOptions = {
     title: "",
     pieHole: 0.6,
