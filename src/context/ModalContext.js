@@ -10,9 +10,11 @@ export default function ModalContextProvider(props) {
         setIsModalOpen(!isModalOpen);
     }
 
+    return(
     <ModalContext.Provider value={{isModalOpen, toggleModalState}}>
         {props.children}
     </ModalContext.Provider>
+    );
 }
 
 

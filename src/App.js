@@ -12,6 +12,7 @@ import Dashboard from './dashboard/Dashboard';
 import Login from './login/Login';
 import Analytics from './Analytics/Analytics';
 import Team from './Team/Team';
+import AuthContextProvider from './context/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -40,19 +41,21 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <Grid container spacing={0}>
-        <Grid item xs={12} >
-          {(windowDimensions.width > 600) ? <Paper className={classes.nav}><NavBar /></Paper> : <Paper className={classes.nav}><HamNav /></Paper>}
+    <AuthContextProvider>
+      <Router>
+        <Grid container spacing={0}>
+          <Grid item xs={12} >
+            {(windowDimensions.width > 600) ? <Paper className={classes.nav}><NavBar /></Paper> : <Paper className={classes.nav}><HamNav /></Paper>}
+          </Grid>
         </Grid>
-      </Grid>
-      <Route exact path="/" component={LandingPage} />
-      <Route exact path="/signup" component={Signup} />
-      <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/team" component={Team} />
-      <Route exact path="/analytics" component={Analytics} />
-    </Router>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/team" component={Team} />
+        <Route exact path="/analytics" component={Analytics} />
+      </Router>
+    </AuthContextProvider>
   );
 }
 
