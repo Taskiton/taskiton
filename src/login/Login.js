@@ -14,13 +14,15 @@ const useStyles = loginPageStyle
 
 export default function Login() {
     
+ 
     let history = useHistory();
     const [user, setUser] = useState({
         mail: "",
         password: ""
 
     });
-
+    
+    
     const classes = useStyles();
     const frmStyle = {
         height: '75vh',
@@ -50,6 +52,7 @@ export default function Login() {
             } 
             return response.json();
         }).then(function (result) {
+            
             console.log(result);
             if(result.code === 204){
                 alert(result.success);

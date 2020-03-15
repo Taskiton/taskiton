@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
 function App() {
 
   const classes = useStyles();
-
+  const [login,setLogin] = useState({check:'false'});
+  
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
@@ -49,9 +50,9 @@ function App() {
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/login" component={Login}  />
       <Route exact path="/team" component={Team} />
-      <Route exact path="/analytics" component={Analytics} />
+      <Route exact path="/analytics" component={Analytics}  />
     </Router>
   );
 }
