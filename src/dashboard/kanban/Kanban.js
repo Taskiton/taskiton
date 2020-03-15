@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, newContext  } from 'react';
 import { initialData } from './HandleKanbanData';
 import Column from './Column';
 import { DragDropContext } from "react-beautiful-dnd";
@@ -7,6 +7,8 @@ import TaskForm from '../TaskForm/TaskForm';
 import EditTaskForm from '../TaskForm/EditTaskForm';
 
 export default function Kanban() {
+
+    // const newContext = React.createContext({ color: 'black' });
 
     const [data, setData] = useState(null);
     //Fetch initial data

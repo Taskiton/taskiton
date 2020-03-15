@@ -4,8 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import DateFnsUtils from '@date-io/date-fns';
-import { DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
+import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -25,9 +26,9 @@ export default function EditTaskForm(props) {
     });
 
     let handleChange = (event) => {
-        let name='';
-        let value='';
-        if(typeof event.target !== 'undefined') {
+        let name = '';
+        let value = '';
+        if (typeof event.target !== 'undefined') {
             name = event.target.name;
             value = event.target.value;
         }
@@ -59,7 +60,7 @@ export default function EditTaskForm(props) {
             return response.json();
         })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 setUsers(data);
             }).catch(function (err) {
                 alert("Error - refresh page and try again");
@@ -85,7 +86,7 @@ export default function EditTaskForm(props) {
                         name='taskDetails' />
                 </div>
                 <div>
-                     <InputLabel id="demo-simple-select-label" style={{ paddingTop: '5%' }}>Assign To</InputLabel >
+                    <InputLabel id="demo-simple-select-label" style={{ paddingTop: '8%', paddingBottom: '3%' }}>Assign To</InputLabel >
                     <Select
                         native
                         labelId="demo-simple-select-label"
@@ -95,25 +96,37 @@ export default function EditTaskForm(props) {
                         name='assignedTo'
                         required>
                         <option value="" hidden>Select a user</option>
-                        {users.map(user => <option key={user.user_id} value={(user.name).split(" ")[0][0]+(user.name).split(" ")[1][0]}>{(user.name).split(" ")[0]}</option>
+                        {users.map(user => <option key={user.user_id} value={(user.name).split(" ")[0][0] + (user.name).split(" ")[1][0]}>{(user.name).split(" ")[0]}</option>
                         )}
                     </Select>
                 </div>
-                <br/>
                 <div>
+                <InputLabel id="demo-simple-select-label" style={{ paddingTop: '10%', paddingBottom: '3%' }}>Due Date:</InputLabel >
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DateTimePicker value={task.dueDate} onChange={handleChange} name='dueDate' disablePast/>
+                        <DateTimePicker value={task.dueDate} onChange={handleChange} name='dueDate' disablePast />
                     </MuiPickersUtilsProvider>
                 </div>
-                <br/>
-                <div>
-                    <input type="submit" value="Submit" />
+                <br />
+                <div style={{width:'100%', textAlign: 'center'}}>
+                    {/* <input type="submit" value="Submit" /> */}
+                    <Button type="submit" variant="contained" color="primary">
+                        Save
+                    </Button>
+                    <Button variant="contained" style={{marginLeft:'5%'}}>
+                        Cancel
+                    </Button>
                 </div>
 
             </form>
             <br />
-            <input type="button" value="Delete"
-                onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} />
+            <div style={{width:'100%', textAlign: 'center'}}>
+                <Button variant="contained" color="secondary"
+                    onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} >
+                    Delete
+                </Button>
+            </div>
+            {/* <input type="button" value="Delete"
+                onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} /> */}
         </div>
     );
 }
