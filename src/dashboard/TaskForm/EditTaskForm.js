@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
+import DateFnsUtils from '@date-io/date-fns';
+import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -24,7 +26,16 @@ export default function EditTaskForm(props) {
     });
 
     let handleChange = (event) => {
-        const { name, value } = event.target;
+        let name = '';
+        let value = '';
+        if (typeof event.target !== 'undefined') {
+            name = event.target.name;
+            value = event.target.value;
+        }
+        else {
+            name = 'dueDate';
+            value = event.toLocaleDateString('en-US');
+        }
         setTask(prevState => {
             return {
                 ...prevState,
@@ -32,6 +43,31 @@ export default function EditTaskForm(props) {
             }
         });
     }
+
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        let url = "http://api.taskiton.wmdd.ca/userlist";
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json, text/plain, */*'
+                , 'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+            .then(data => {
+                //console.log(data);
+                setUsers(data);
+            }).catch(function (err) {
+                alert("Error - refresh page and try again");
+                console.log(err)
+            });
+    }, [])
+
 
     return (
         <div>
@@ -50,35 +86,47 @@ export default function EditTaskForm(props) {
                         name='taskDetails' />
                 </div>
                 <div>
-                    <InputLabel id="demo-simple-select-label" style={{ paddingTop: '5%' }}>Assign To</InputLabel>
+                    <InputLabel id="demo-simple-select-label" style={{ paddingTop: '8%', paddingBottom: '3%' }}>Assign To</InputLabel >
                     <Select
+                        native
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={task.assignedTo}
                         onChange={handleChange}
                         name='assignedTo'
-                    >
-                        <MenuItem value={"AU"}>Arsh</MenuItem>
-                        <MenuItem value={"YT"}>Yalcin</MenuItem>
-                        <MenuItem value={"BK"}>Bhinder</MenuItem>
+                        required>
+                        <option value="" hidden>Select a user</option>
+                        {users.map(user => <option key={user.user_id} value={(user.name).split(" ")[0][0] + (user.name).split(" ")[1][0]}>{(user.name).split(" ")[0]}</option>
+                        )}
                     </Select>
                 </div>
                 <div>
-                    <TextField id="standard-secondary" color="primary"
-                        value={task.dueDate} onChange={handleChange} className={classes.textField}
-                        name='dueDate'
-                        type="date"
-                        defaultValue="2017-05-24"
-                        style={{ paddingTop: '10%' }} />
+                <InputLabel id="demo-simple-select-label" style={{ paddingTop: '10%', paddingBottom: '3%' }}>Due Date:</InputLabel >
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <DateTimePicker value={task.dueDate} onChange={handleChange} name='dueDate' disablePast />
+                    </MuiPickersUtilsProvider>
                 </div>
-                <div>
-                    <input type="submit" value="Submit" />
+                <br />
+                <div style={{width:'100%', textAlign: 'center'}}>
+                    {/* <input type="submit" value="Submit" /> */}
+                    <Button type="submit" variant="contained" color="primary">
+                        Save
+                    </Button>
+                    <Button variant="contained" style={{marginLeft:'5%'}}>
+                        Cancel
+                    </Button>
                 </div>
 
             </form>
             <br />
-            <input type="button" value="Delete"
-                onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} />
+            <div style={{width:'100%', textAlign: 'center'}}>
+                <Button variant="contained" color="secondary"
+                    onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} >
+                    Delete
+                </Button>
+            </div>
+            {/* <input type="button" value="Delete"
+                onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} /> */}
         </div>
     );
 }

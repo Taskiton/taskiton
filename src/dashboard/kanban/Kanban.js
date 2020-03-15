@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, newContext  } from 'react';
 import { initialData } from './HandleKanbanData';
 import Column from './Column';
 import { DragDropContext } from "react-beautiful-dnd";
@@ -7,6 +7,8 @@ import TaskForm from '../TaskForm/TaskForm';
 import EditTaskForm from '../TaskForm/EditTaskForm';
 
 export default function Kanban() {
+
+    // const newContext = React.createContext({ color: 'black' });
 
     const [data, setData] = useState(null);
     //Fetch initial data
@@ -34,7 +36,7 @@ export default function Kanban() {
         }
 
         if (source.droppableId === destination.droppableId) {
-            console.log("Moving in the same column");
+            //console.log("Moving in the same column");
             const column = data.columns[source.droppableId];
             const newTaskIds = Array.from(column.taskIds);
             newTaskIds.splice(source.index, 1);
@@ -56,7 +58,7 @@ export default function Kanban() {
             }
             );
         } else if (destination !== null) {
-            console.log("Moving to new column");
+            //console.log("Moving to new column");
             const sourceColumn = data.columns[source.droppableId];
             const newSourceTaskIds = sourceColumn.taskIds;
             newSourceTaskIds.splice(source.index, 1);
@@ -85,6 +87,7 @@ export default function Kanban() {
 
                 }
             });
+            moveTaskToNewColumn(draggableId, destination);
         }
         //document.body.style.color = "black";
         //Call server to update here
@@ -97,6 +100,32 @@ export default function Kanban() {
     // let handleAddNewTask = () => {
     //     setOpen(true);
     // }
+
+    let moveTaskToNewColumn = (_taskId, _columnId) =>{
+        var data = {
+            taskId: _taskId,
+            columnId: _columnId.droppableId.split('-')[1],
+        }
+        let url = "http://api.taskiton.wmdd.ca/movetask";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                //alert("Error - refresh page and try moving again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            //alert("Error - refresh page and try moving again");
+            console.log(err)
+        });
+    }
 
     /*************************************************************/
     /*************************************************************/
@@ -130,14 +159,23 @@ export default function Kanban() {
         }
 
         const allTasks = data.tasks;
-
+        
         let numbOfTasks = Object.keys(allTasks).length;
-        const newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]));
+        let newTaskId = '';
+        if(numbOfTasks>0) {
+            newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]));
+        } else {
+            newTaskId = 'task-1';
+        }
+        
+        let assignedUser = "";
+        if(val.assignedTo)
+            assignedUser=val.assignedTo.split(" ")[0].split("")[0]+val.assignedTo.split(" ")[1].split("")[0];
         const newTask = {
             id: newTaskId,
             taskName: val.taskName,
             details: val.taskDetails,
-            assignedTo: val.assignedTo,
+            assignedTo: assignedUser,
             dueDate: val.dueDate,
         };
         allTasks[newTaskId] = newTask; // update the state
@@ -165,8 +203,37 @@ export default function Kanban() {
             }
         }
         );
-
+        addNewTaskToDb(newTask, val.assignedTo);
         setmodalStateOpen(false);
+    }
+
+    let addNewTaskToDb = (newTask, assignedUser)=> {
+        
+        var data = {
+            ...newTask,
+            assignedTo:assignedUser,
+            columnId: 1,
+        }
+        console.log(data);
+        let url = "http://api.taskiton.wmdd.ca/tasks";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
     }
     /*************************************************************/
 
@@ -205,8 +272,34 @@ export default function Kanban() {
         });
 
         setmodalStateOpen(false);
+        editTaskFromDb(allTasks[_taskId]);
     }
 
+    let editTaskFromDb = (_task)=> {
+        
+        let url = "http://api.taskiton.wmdd.ca/updatetask";
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(_task)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
+    }
+
+    /*************************************************************/
+    /*************************************************************/
     //Delete the card
     let handleEditNewTaskDelete = (_taskId) => {
         const allTasks = data.tasks;
@@ -232,9 +325,38 @@ export default function Kanban() {
             }
         });
         setmodalStateOpen(false);
-        
+        deleteTaskFromDb(_taskId)
     }
 
+    let deleteTaskFromDb = (_taskId)=> {
+        
+        var data = {
+            task_id : _taskId
+        }
+
+        let url = "http://api.taskiton.wmdd.ca/tasks";
+        fetch(url, {
+            method: 'DELETE',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - refresh page and try again");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        }).catch(function (err) {
+            alert("Error - refresh page and try again");
+            console.log(err)
+        });
+    }
+
+    /*************************************************************/
+    /*************************************************************/
     let fetchInitialData = () => {
         return new Promise((resolve, reject) => {
             const proxyurl = 'https://cors-anywhere.herokuapp.com/';
@@ -248,7 +370,7 @@ export default function Kanban() {
                             [task] : {
                                 id: data[task].task_id,
                                 taskName: data[task].task_name,
-                                assignedTo: data[task].user_name.charAt(0),
+                                assignedTo: data[task].user_name.split(" ")[0][0] + data[task].user_name.split(" ")[1][0],
                                 details: data[task].task_details,
                                 dueDate: data[task].due_date
                             }
@@ -257,11 +379,7 @@ export default function Kanban() {
                     fetch("http://api.taskiton.wmdd.ca/columnmapping")
                     .then(response => response.json())
                     .then(data => {
-                        if (data)
                         
-                            resolve("Promise resolved successfully");
-                        else
-                            reject(Error("Promise rejected"));
                         Object.keys(data).map(column=>{
                             initialData.columns = {
                                 ...initialData.columns,
@@ -270,7 +388,12 @@ export default function Kanban() {
                                     taskIds : data[column]
                                 }
                             }
-                        })   
+                            //console.log(column);
+                        }) 
+                        if (data)
+                            resolve("Promise resolved successfully");
+                        else
+                            reject(Error("Promise rejected"));
                     })
                     //console.log(initialData);
                 })
