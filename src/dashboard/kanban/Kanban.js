@@ -104,7 +104,7 @@ export default function Kanban() {
             taskId: _taskId,
             columnId: _columnId.droppableId.split('-')[1],
         }
-        let url = "http://localhost:3000/movetask";
+        let url = "http://api.taskiton.wmdd.ca/movetask";
         fetch(url, {
             method: 'POST',
             headers: { 'Accept': 'application/json, text/plain, */*'
@@ -113,14 +113,14 @@ export default function Kanban() {
         }).then(response => {
             console.log(response);
             if (response.status >= 400) {
-                alert("Error - refresh page and try moving again");
+                //alert("Error - refresh page and try moving again");
             }
             return response.json();
         })
         .then(data => {
             console.log(data);
         }).catch(function (err) {
-            alert("Error - refresh page and try moving again");
+            //alert("Error - refresh page and try moving again");
             console.log(err)
         });
     }
@@ -213,7 +213,7 @@ export default function Kanban() {
             columnId: 1,
         }
         console.log(data);
-        let url = "http://localhost:3000/tasks";
+        let url = "http://api.taskiton.wmdd.ca/tasks";
         fetch(url, {
             method: 'POST',
             headers: { 'Accept': 'application/json, text/plain, */*'
@@ -274,16 +274,13 @@ export default function Kanban() {
     }
 
     let editTaskFromDb = (_task)=> {
-        var data = {
-            task : _task
-        }
-
-        let url = "http://localhost:3000/tasks";
+        
+        let url = "http://api.taskiton.wmdd.ca/updatetask";
         fetch(url, {
             method: 'POST',
             headers: { 'Accept': 'application/json, text/plain, */*'
             ,'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(_task)
         }).then(response => {
             console.log(response);
             if (response.status >= 400) {
@@ -335,7 +332,7 @@ export default function Kanban() {
             task_id : _taskId
         }
 
-        let url = "http://localhost:3000/tasks";
+        let url = "http://api.taskiton.wmdd.ca/tasks";
         fetch(url, {
             method: 'DELETE',
             headers: { 'Accept': 'application/json, text/plain, */*'
@@ -361,7 +358,7 @@ export default function Kanban() {
     let fetchInitialData = () => {
         return new Promise((resolve, reject) => {
             const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-            const url = 'http://localhost:3000/tasks';
+            const url = 'http://api.taskiton.wmdd.ca/tasks';
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -377,14 +374,10 @@ export default function Kanban() {
                             }
                         }
                     })
-                    fetch("http://localhost:3000/columnmapping")
+                    fetch("http://api.taskiton.wmdd.ca/columnmapping")
                     .then(response => response.json())
                     .then(data => {
-                        if (data)
                         
-                            resolve("Promise resolved successfully");
-                        else
-                            reject(Error("Promise rejected"));
                         Object.keys(data).map(column=>{
                             initialData.columns = {
                                 ...initialData.columns,
@@ -393,9 +386,14 @@ export default function Kanban() {
                                     taskIds : data[column]
                                 }
                             }
-                        })   
+                            console.log(column);
+                        }) 
+                        if (data)
+                            resolve("Promise resolved successfully");
+                        else
+                            reject(Error("Promise rejected"));
                     })
-                    //console.log(initialData);
+                    console.log(initialData);
                 })
 
         })

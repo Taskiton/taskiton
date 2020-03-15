@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
+import DateFnsUtils from '@date-io/date-fns';
+import { DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 const useStyles = makeStyles(theme => ({
@@ -24,8 +25,16 @@ export default function EditTaskForm(props) {
     });
 
     let handleChange = (event) => {
-        console.log(task);
-        const { name, value } = event.target;
+        let name='';
+        let value='';
+        if(typeof event.target !== 'undefined') {
+            name = event.target.name;
+            value = event.target.value;
+        }
+        else {
+            name = 'dueDate';
+            value = event.toLocaleDateString('en-US');
+        }
         setTask(prevState => {
             return {
                 ...prevState,
@@ -36,7 +45,7 @@ export default function EditTaskForm(props) {
 
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        let url = "http://localhost:3000/users";
+        let url = "http://api.taskiton.wmdd.ca/userlist";
         fetch(url, {
             method: 'GET',
             headers: {
@@ -90,14 +99,13 @@ export default function EditTaskForm(props) {
                         )}
                     </Select>
                 </div>
+                <br/>
                 <div>
-                    <TextField id="datetime-local" color="primary"
-                        value={task.dueDate} onChange={handleChange} className={classes.textField}
-                        name='dueDate' 
-                        type="datetime-local"
-                        defaultValue="2017-05-24"
-                        style={{paddingTop:'10%'}}/>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <DateTimePicker value={task.dueDate} onChange={handleChange} name='dueDate' disablePast/>
+                    </MuiPickersUtilsProvider>
                 </div>
+                <br/>
                 <div>
                     <input type="submit" value="Submit" />
                 </div>

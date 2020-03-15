@@ -38,7 +38,6 @@ export default function Task(props) {
     return (
         <Draggable draggableId={props.task.id} index={props.index}>
             {
-
                 (provided, snapshot) => (
                     <div>
                         <div className="item"
@@ -55,7 +54,7 @@ export default function Task(props) {
                                 <div>
                                     <span style={{fontSize: '0.7em'}}>
                                         {props.task.dueDate?<span>Due:</span>:""}
-                                        {props.task.dueDate}</span>
+                                        {(props.task.dueDate).toString()}</span>
                                 </div>
                             </div>
                             <IconButton aria-label="More info" color="secondary">
