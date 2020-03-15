@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './LandingPage.css';
 import {landingPageStyle} from'./LandingPageStyle';
 import Grid from '@material-ui/core/Grid';
@@ -22,7 +22,7 @@ export default function LandingPage() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <div className={classes.promo1} style={{ backgroundColor: '' }}>
-                        <img className={classes.landingPhoto} src={landingLogo} ></img>
+                        <img className={classes.landingPhoto} src={landingLogo} alt="mainpic"></img>
                         
                     </div>
                 </Grid>

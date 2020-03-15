@@ -158,7 +158,7 @@ function App() {
              text: response.messages[i].entry.text,
              date: localeDateTime
            });
-           console.log(response.messages)
+           //console.log(response.messages)
          }
          setMessages(messages=>messages.concat(newMessages));
        }

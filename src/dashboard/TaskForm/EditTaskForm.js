@@ -95,7 +95,7 @@ export default function EditTaskForm(props) {
                         name='assignedTo'
                         required>
                         <option value="" hidden>Select a user</option>
-                        {users.map(user => <option value={(user.name).split(" ")[0][0]+(user.name).split(" ")[1][0]}>{(user.name).split(" ")[0]}</option>
+                        {users.map(user => <option key={user.user_id} value={(user.name).split(" ")[0][0]+(user.name).split(" ")[1][0]}>{(user.name).split(" ")[0]}</option>
                         )}
                     </Select>
                 </div>

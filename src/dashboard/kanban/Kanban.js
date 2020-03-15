@@ -386,14 +386,14 @@ export default function Kanban() {
                                     taskIds : data[column]
                                 }
                             }
-                            console.log(column);
+                            //console.log(column);
                         }) 
                         if (data)
                             resolve("Promise resolved successfully");
                         else
                             reject(Error("Promise rejected"));
                     })
-                    console.log(initialData);
+                    //console.log(initialData);
                 })
 
         })
