@@ -402,6 +402,13 @@ export default function Kanban() {
     }
 
     /*************************************************************/
+    /*************************************************************/
+    let closeModal = () => {
+        setmodalStateOpen(false);
+    }
+    /*************************************************************/
+    /*************************************************************/
+    /*************************************************************/
     if (!data) {
         return <div />
     }
@@ -421,11 +428,13 @@ export default function Kanban() {
                 })}
             </DragDropContext>
             <KanbanModal modalStateOpen={modalStateOpen} handleModalClose={handleModalClose}>
-                {isItNewTask ? <TaskForm handleAddNewTaskSubmit={handleAddNewTaskSubmit} />
+                {isItNewTask ? <TaskForm handleAddNewTaskSubmit={handleAddNewTaskSubmit} 
+                closeModal={closeModal}/>
                     : <EditTaskForm
                         task={editTaskDetails}
                         handleEditTaskSubmit={handleEditTaskSubmit}
                         handleEditNewTaskDelete={handleEditNewTaskDelete}
+                        closeModal={closeModal}
                     />}
             </KanbanModal>
         </div>
