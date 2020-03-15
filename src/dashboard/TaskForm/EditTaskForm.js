@@ -112,7 +112,7 @@ export default function EditTaskForm(props) {
                     <Button type="submit" variant="contained" color="primary">
                         Save
                     </Button>
-                    <Button variant="contained" style={{marginLeft:'5%'}}>
+                    <Button variant="contained" style={{marginLeft:'5%'}} onClick={props.closeModal}>
                         Cancel
                     </Button>
                 </div>

@@ -14,9 +14,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
-
-
 export default function TaskForm(props) {
 
     var date = (new Date());
@@ -115,7 +112,7 @@ export default function TaskForm(props) {
                 <Button type="submit" variant="contained" color="primary">
                     Save
                 </Button>
-                <Button variant="contained" style={{marginLeft:'5%'}}>
+                <Button variant="contained" style={{marginLeft:'5%'}} onClick={props.closeModal}>
                     Cancel
                 </Button>
             </div>
