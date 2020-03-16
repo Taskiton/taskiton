@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { loginPageStyle } from './LoginStyle';
 import { palette } from '@material-ui/system';
 import { useHistory } from "react-router-dom";
@@ -8,13 +8,14 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormItem from './components/formItem'
 import signupLogo from '../images/signupImage.svg'
+import { AuthContext } from '../context/AuthContext';
 
 
 const useStyles = loginPageStyle
 
 export default function Login() {
     
- 
+
     let history = useHistory();
     const [user, setUser] = useState({
         mail: "",
@@ -22,7 +23,9 @@ export default function Login() {
 
     });
     
-    
+    const context = useContext(AuthContext);
+    const { toggleAuth } = context; 
+
     const classes = useStyles();
     const frmStyle = {
         height: '75vh',
@@ -58,6 +61,7 @@ export default function Login() {
                 alert(result.success);
             }else if (result.code === 200){
                 history.push("/dashboard");
+                toggleAuth();
             }
         }).catch(function (err) {
             console.log(err)

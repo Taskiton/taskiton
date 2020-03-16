@@ -9,6 +9,7 @@ import FormItem from './components/formItem'
 import signupLogo from '../images/signupImage.svg'
 
 
+
 const useStyles = signupPageStyle
 
 export default function Signup() {
@@ -84,6 +85,9 @@ export default function Signup() {
             }    
         });
     }
+    const handleLogin = () => {
+        history.push("/login");
+    }
 
     return (
         <div className={classes.formStyle}>
@@ -100,7 +104,7 @@ export default function Signup() {
                         <FormItem type='password' label="Password" name='password' value={user.password} onChange={(event) => handleChange(event)} />
                         <FormItem type='password' label="Confirm Password" name='copassword' value={user.copassword} onChange={(event) => handleChange(event)} />
                         <Button id="submitButton" type="submit" className={classes.signUpButton} variant="contained" color="primary"> SIGN UP </Button>
-                        <Button id="loginButton" className={classes.loginButton} variant="contained" color="primary"> LOGIN </Button>
+                        <Button id="loginButton" className={classes.loginButton} variant="contained" color="primary" onClick={handleLogin}> LOGIN </Button>
                     </form>
                 </Grid>
             </Grid>

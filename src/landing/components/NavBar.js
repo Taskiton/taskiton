@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
+import { AuthContext } from '../../context/AuthContext';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +65,10 @@ NavBar.defaultProps = {
   isHamNav: false,
 }
 export default function NavBar(props) {
+
+  const context = useContext(AuthContext);
+  const { isAuthenticated, toggleAuth} = context;
+
   const classes = useStyles();
 
   const preventDefault = event => event.preventDefault();
@@ -78,10 +83,16 @@ export default function NavBar(props) {
     } : {
       paddingRight: '5%',
       float: 'left',
-
     };
 
+  let history = useHistory();
+  let handleSignout = () => {
+    history.push("/");
+    toggleAuth();
+  }
+
   return (
+
     <div>
       <Typography className={classes.root} >
         <Box className={classes.linkStyle}>
@@ -92,24 +103,30 @@ export default function NavBar(props) {
           <Link to="/team" style={linkStyle} className={classes.linkStyle}>
             Team
       </Link>
-          <Link to="/dashboard" style={linkStyle} className={classes.linkStyle}>
+          <Link to="/" style={linkStyle} className={classes.linkStyle}>
             Contact Us
       </Link>
+      {isAuthenticated?
+        <div>
           <Link to="/analytics" style={linkStyle} className={classes.linkStyle}>
-            Analytics
-      </Link>
+                Analytics
+          </Link>
+          <Link to="/dashboard" style={linkStyle} className={classes.linkStyle}>
+                Dashboard
+          </Link>
+        </div> : ''}
+      
         </Box>
         <Box component="span" >
-
+        {!isAuthenticated?
           <Link to="/signup" style={{ textDecoration: "none" }}>
             <Button variant="contained" className={classes.buttonStyle} style={{ backgroundColor: '#000000' }}>Signup</Button>
-          </Link>
-
-          <Link to="/dashboard" style={{ textDecoration: "none" }}>
-            <Button variant="contained" className={classes.buttonStyle}>
-              Dashboard
+          </Link>:""}
+          {isAuthenticated?
+            <Button variant="contained" className={classes.buttonStyle} onClick={handleSignout}>
+              Signout
             </Button>
-          </Link>
+          :""}
         </Box>
       </Typography>
     </div>
