@@ -88,7 +88,8 @@ export default function NavBar(props) {
   let history = useHistory();
   let handleSignout = () => {
     history.push("/");
-    toggleAuth();
+    toggleAuth(false);
+    localStorage.setItem("isAuth", false)
   }
 
   return (

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
 import Paper from '@material-ui/core/Paper';
@@ -12,7 +12,7 @@ import Dashboard from './dashboard/Dashboard';
 import Login from './login/Login';
 import Analytics from './Analytics/Analytics';
 import Team from './Team/Team';
-import AuthContextProvider from './context/AuthContext';
+import AuthContextProvider, { AuthContext } from './context/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -41,22 +41,28 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const context = useContext(AuthContext);
+  const {isAuthenticated} = context;
   return (
-    <AuthContextProvider>
       <Router>
         <Grid container spacing={0}>
           <Grid item xs={12} >
             {(windowDimensions.width > 600) ? <Paper className={classes.nav}><NavBar /></Paper> : <Paper className={classes.nav}><HamNav /></Paper>}
           </Grid>
         </Grid>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/team" component={Team} />
-        <Route exact path="/analytics" component={Analytics} />
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/team" component={Team} />
+          {isAuthenticated?
+            <div>
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/analytics" component={Analytics} />
+            </div>:''}
+          <Redirect to='/' />
+        </Switch>
       </Router>
-    </AuthContextProvider>
   );
 }
 

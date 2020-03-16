@@ -4,10 +4,10 @@ export const AuthContext = createContext();
 
 export default function AuthContextProvider(props) {
 
-    const[isAuthenticated, setIsAuthenticated] = useState(false);
+    const[isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("isAuth")=== 'true');
 
-    const toggleAuth = () => {
-        setIsAuthenticated(!isAuthenticated);
+    const toggleAuth = (parm) => {
+        setIsAuthenticated(parm);
     }
     return(
     <AuthContext.Provider value={{isAuthenticated, toggleAuth}}>

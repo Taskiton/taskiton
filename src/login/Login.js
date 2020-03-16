@@ -60,8 +60,9 @@ export default function Login() {
             if(result.code === 204){
                 alert(result.success);
             }else if (result.code === 200){
+                localStorage.setItem("isAuth", true)
+                toggleAuth(true);
                 history.push("/dashboard");
-                toggleAuth();
             }
         }).catch(function (err) {
             console.log(err)
