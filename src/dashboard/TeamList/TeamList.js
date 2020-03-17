@@ -50,7 +50,7 @@ export default function TeamList() {
 
     return(
         <div>
-            {users.map(user => <Avatar className={classes.avatar} key={user.user_id}>{(user.name).split(" ")[0][0]}{(user.name).split(" ")[1][0]}</Avatar>
+            {users.map(user => <Avatar title={user.name} className={classes.avatar} key={user.user_id}>{(user.name).split(" ")[0][0]}{(user.name).split(" ")[1][0]}</Avatar>
                     )}
         </div>
     );
