@@ -15,8 +15,8 @@ export default function LandingPage() {
                 <Grid item xs={12} sm={6}>
                     <div className={classes.promo1} style={{ backgroundColor: '' }}>
                         <p className={classes.landingMotto}>
-                            <h1 style={{fontSize:'2.2em'}}>Suspendisse potenti.</h1>
-                            <p style={{width:'100%',fontSize:'1.25em'}}>Vivamus lorem urna, viverra non pharetra ac, rhoncus a tortor. Nulla vestibulum ligula tortor, mattis tincidunt diam ultrices sit amet.</p>
+                            <h1 style={{fontSize:'2.2em'}}>Work Efficiently</h1>
+                            <p style={{width:'100%',fontSize:'1.25em'}}>Manage your household tasks easily and efficiently using Tasktion. Taskiton enable you to organize daily tasks and help you to stay organized</p>
                         </p>
                     </div>
                 </Grid>

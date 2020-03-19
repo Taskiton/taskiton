@@ -23,6 +23,7 @@
     .item {
         padding: 8px;
         font-size: 1.2em;
+        border-radius: 2%;
     }
 }
 

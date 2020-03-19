@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     height: '56px',
-    backgroundColor:'#A8D0E6'
+    backgroundColor:'white'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
