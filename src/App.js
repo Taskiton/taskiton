@@ -13,6 +13,7 @@ import Login from './login/Login';
 import Analytics from './Analytics/Analytics';
 import Team from './Team/Team';
 import AuthContextProvider, { AuthContext } from './context/AuthContext';
+import Contact from './contact/Contact';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/team" component={Team} />
+          <Route exact path="/contact" component={Contact} />
           {isAuthenticated?
             <div>
               <Route exact path="/dashboard" component={Dashboard} />

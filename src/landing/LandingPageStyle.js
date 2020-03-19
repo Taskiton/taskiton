@@ -16,7 +16,7 @@ export const landingPageStyle = makeStyles(theme => ({
     promo1: {
         height: '96vh',
         [theme.breakpoints.down('xs')]: {
-            height: '60vh',
+            // height: '60vh',
         }
     },
     promo2: {
@@ -41,15 +41,17 @@ export const landingPageStyle = makeStyles(theme => ({
 
     },
     landingMotto:{
-        paddingTop:'20vh',
+        paddingTop:'25vh',
         width:'50%',
         margin:'auto',
         [theme.breakpoints.down('xs')]: {
             paddingTop:'10vh',
             width:'80%',
-            textAlign:'center'
+            textAlign:'center',
+            marginTop: '20%'
         }
-
-
+    },
+    pricing: {
+        padding:10,
     }
 }));

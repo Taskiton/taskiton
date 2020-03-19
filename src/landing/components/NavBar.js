@@ -104,7 +104,7 @@ export default function NavBar(props) {
           <Link to="/team" style={linkStyle} className={classes.linkStyle}>
             Team
       </Link>
-          <Link to="/" style={linkStyle} className={classes.linkStyle}>
+          <Link to="/contact" style={linkStyle} className={classes.linkStyle}>
             Contact Us
       </Link>
       {isAuthenticated?
