@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0d5d8a353543f6c528fed61f154d1b52",
+    "revision": "5bcdb749b9fb6b45edc07d185537004c",
     "url": "/taskiton/index.html"
   },
   {
-    "revision": "680c41876d1b071f6b6a",
-    "url": "/taskiton/static/css/main.87ddee45.chunk.css"
+    "revision": "6af8bee18253696bd584",
+    "url": "/taskiton/static/css/main.1abdac62.chunk.css"
   },
   {
-    "revision": "951f1f7aa5fc72ce0540",
-    "url": "/taskiton/static/js/2.bad42f07.chunk.js"
+    "revision": "74527601ed04fc6eaa3e",
+    "url": "/taskiton/static/js/2.6a81dd71.chunk.js"
   },
   {
-    "revision": "b51e62edbcf7a9c4f4ad13f506021d3e",
-    "url": "/taskiton/static/js/2.bad42f07.chunk.js.LICENSE"
+    "revision": "485c9edbd633fb8f5cdac9c53165b247",
+    "url": "/taskiton/static/js/2.6a81dd71.chunk.js.LICENSE"
   },
   {
-    "revision": "680c41876d1b071f6b6a",
-    "url": "/taskiton/static/js/main.30b6c8b6.chunk.js"
+    "revision": "6af8bee18253696bd584",
+    "url": "/taskiton/static/js/main.00a30476.chunk.js"
   },
   {
     "revision": "1d1c5a4e15af40c91fa9",
