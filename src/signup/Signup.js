@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { signupPageStyle } from './SignupStyle';
 import { palette } from '@material-ui/system';
 import Button from '@material-ui/core/Button';
@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormItem from './components/formItem'
 import signupLogo from '../images/signupImage.svg'
-
+import { AuthContext } from '../context/AuthContext';
 
 
 const useStyles = signupPageStyle
@@ -22,6 +22,9 @@ export default function Signup() {
         password: "",
         copassword: ""
     });
+
+    const context = useContext(AuthContext);
+    const { toggleAuth } = context; 
 
     const classes = useStyles();
     const frmStyle = {
@@ -58,6 +61,8 @@ export default function Signup() {
             // return response.json();
         }).then(function (data) {
             // console.log(data);
+            localStorage.setItem("isAuth", true)
+            toggleAuth(true);
             history.push("/dashboard");
             if (data == "success") {
                 console.log("Success");
