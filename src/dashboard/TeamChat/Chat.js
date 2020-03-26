@@ -72,11 +72,10 @@ const useStyles = makeStyles(theme => ({
 
 
 //Fetching the username
-let username = UserData.users[1].displayname;
-if(localStorage.getItem("username")) {
-  username = localStorage.getItem("username").split(" ")[0];
-} 
-
+// let username = UserData.users[1].displayname;
+// if(localStorage.getItem("username")) {
+//   username = localStorage.getItem("username").split(" ")[0];
+// } 
 
 let userInitials = "BN";
 if(localStorage.getItem("username")) {
@@ -89,8 +88,15 @@ function App() {
   //Set a default channel incase someone navigates to the base url without
   //specificfying a channel name parameter.
   let defaultChannel = "Global";
- 
- 
+  
+  //Fetching the username
+  const[username, setUsername] = useState(UserData.users[1].displayname);
+  useEffect(()=> {
+    const timer = setTimeout(() => {
+    setUsername(localStorage.getItem("username").split(" ")[0]);
+    }, 1000);
+  }, [username]);
+  
   const [channel,setChannel] = useState(defaultChannel);
   const [messages,setMessages] = useState([]);
   // const [username] = useState([UserData.users[0].displayname,Math.floor(Math.random() * 10)].join('-'));
@@ -123,8 +129,9 @@ function App() {
   }
   //This is where we set up PubNub and handle events that come through. 
   useEffect(()=>{
+    const timer = setTimeout(() => {
     getUserListFromAPI();
-    console.log("setting up pubnub");
+    console.log("setting up pubnub"+username);
     const pubnub = new PubNub({
       publishKey: ApiConfig.PUBLISHKEY,
       subscribeKey: ApiConfig.SUBSCRIBEKEY,
@@ -204,6 +211,7 @@ function App() {
       pubnub.unsubscribeAll();
       setMessages([]);
     }
+  }, 2000);
   },[channel, username]);
   
 
@@ -242,6 +250,7 @@ function App() {
 
   //Publishing messages via PubNub
   function publishMessage(){
+  console.log(username)
    if (tempMessage.value) {
      let messageObject = {
        text: tempMessage.value,
@@ -318,11 +327,15 @@ function Message(props){
   const classes = useStyles();
   let userName = props.uuid;
   let message = props.text;
-  let breakMessage = message.replace(/(.{5})/g, "$1<br>");
+  let breakMessage = message.replace(/(.{5})/g, "$1");
   //console.log(document.getElementById('chip'))
   // console.log(breakMessage)
   let boldUsername = userName;
-  userInitials = props.uuid.charAt(0);
+  if(props.uuid === undefined) {
+    userInitials = "*";
+  } else {
+    userInitials = props.uuid.charAt(0);
+  }
   var messageIndividual = `${boldUsername} - ${props.text}`
   return (
     <div>
@@ -332,9 +345,8 @@ function Message(props){
       <span className={classes.chatUsername}>{props.uuid}</span>
       <span className={classes.date}>{props.date}</span>
       </div>
-     
       <div className={classes.messageContainer}>
-      <Chip id="chip" className={classes.chatAvatar} label={breakMessage} />
+        <Chip id="chip" className={classes.chatAvatar} label={breakMessage} />
       </div>
       </ListItemText>
     

@@ -97,6 +97,7 @@ export default function NavBar(props) {
     history.push("/");
     toggleAuth(false);
     localStorage.setItem("isAuth", false)
+    localStorage.clear();
   }
 
   return (

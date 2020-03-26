@@ -61,6 +61,7 @@ export default function Login() {
                 alert(result.success);
             }else if (result.code === 200){
                 localStorage.setItem("isAuth", true)
+                localStorage.setItem("username","John Doe");
                 toggleAuth(true);
                 history.push("/dashboard");
                 if(result.code === 200) {
@@ -86,7 +87,6 @@ export default function Login() {
             return response.json();
         })
         .then(data => {
-            console.log(data[0].firstname);
             if(data[0]) {
                 localStorage.setItem("username", data[0].firstname+" "+data[0].lastname);
             }
