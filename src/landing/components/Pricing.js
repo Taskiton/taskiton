@@ -6,10 +6,11 @@ const Pricing = () => {
     const planStyle = {
         fontSize: '3em',
         padding:5,
+        
     }
 
     return (
-        <div style={{ width: '100%', textAlign: 'center'}}>
+        <div style={{ width: '100%', textAlign: 'center', height:'79vh'}}>
             <p style={planStyle}><b>Choose a plan that is right for you</b></p>
             <div style={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent:'center', flexWrap:'wrap', height:'100%'}}>
                 <PricingCard title="Starter" desc="This is a Starter plan" price="Free" />

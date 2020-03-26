@@ -7,7 +7,9 @@
     border-radius: 4px;
     box-sizing: border-box;
   }
-  
+.contactus-header {
+  text-align: center;
+}
 .contactSubmit {
     width: 100%;
     background-color: #F76C6C;

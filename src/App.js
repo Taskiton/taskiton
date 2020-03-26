@@ -11,10 +11,11 @@ import Signup from './signup/Signup';
 import Dashboard from './dashboard/Dashboard';
 import Login from './login/Login';
 import Analytics from './Analytics/Analytics';
-import Team from './Team/Team';
+import Team from './Team/teamProfile';
 import AuthContextProvider, { AuthContext } from './context/AuthContext';
 import Contact from './contact/Contact';
 import { HashRouter } from 'react-router-dom'
+
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -49,7 +50,11 @@ function App() {
       <HashRouter >
         <Grid container spacing={0}>
           <Grid item xs={12} >
-            {(windowDimensions.width > 600) ? <Paper className={classes.nav}><NavBar /></Paper> : <Paper className={classes.nav}><HamNav /></Paper>}
+            {(windowDimensions.width > 600) ? <Paper className={classes.nav}>
+              <NavBar /></Paper> : 
+              <Paper className={classes.nav}>
+                
+                <HamNav /></Paper>}
           </Grid>
         </Grid>
         <Switch>

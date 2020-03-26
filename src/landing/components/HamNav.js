@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import LogoDesktop from "../../images/T.svg";
 import NavBar from './NavBar';
 
 const drawerWidth = 240;
@@ -18,6 +19,12 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+  },
+  logoStyle:{
+    float:'left',
+    position: 'relative',
+   
+   
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -97,6 +104,7 @@ export default function HamNav() {
         })}
       >
         <Toolbar>
+        <img className={classes.logoStyle} style={{width:35,height:35}} src={LogoDesktop}></img>
           <Typography variant="h6" noWrap className={classes.title}>
           </Typography>
           <IconButton

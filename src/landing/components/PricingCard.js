@@ -55,7 +55,7 @@ function PricingCard(props) {
     }
 
     return (
-        <div style={{height:'100%'}}>
+        <div style={{height:'70%'}}>
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <p className={classes.title}>{props.title}</p>

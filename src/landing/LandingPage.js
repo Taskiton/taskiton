@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import landingLogo from '../images/task-icons.svg';
 import Pricing from './components/Pricing';
 
+
 const useStyles = landingPageStyle;
 
 export default function LandingPage() {

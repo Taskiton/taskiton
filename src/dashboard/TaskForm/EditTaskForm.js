@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Paper from '@material-ui/core/Paper';
 import DateFnsUtils from '@date-io/date-fns';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -11,6 +12,10 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme => ({
     textField: {
         paddingBottom: 20,
+        width: '15vw'
+    },
+    paper:{
+        margin: '100px'
     }
 }));
 
@@ -70,6 +75,7 @@ export default function EditTaskForm(props) {
 
 
     return (
+        
         <div>
             <form onSubmit={(event) => {
                 props.handleEditTaskSubmit(task, event, props.task.id)
@@ -127,6 +133,8 @@ export default function EditTaskForm(props) {
             </div>
             {/* <input type="button" value="Delete"
                 onClick={() => { props.handleEditNewTaskDelete(props.task.id) }} /> */}
+            
         </div>
+       
     );
 }

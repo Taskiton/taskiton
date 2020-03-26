@@ -133,6 +133,43 @@ app.get("/users", (req,res) =>{
     })
 })
 
+app.get("/task", (req,res) =>{
+   
+    dbConnection.query(`SELECT COUNT(*) AS taskcount FROM tasks` , (err, rows, fieds) => {
+        if(err){
+            console.log("Failed" + err);
+            res.end()
+            return
+        }
+        console.log("Success!")
+        res.json(rows)
+    })
+})
+
+app.get("/tasks/analyze", (req,res) =>{
+   
+    dbConnection.query(`SELECT c.column_title,COUNT(*) as 'task_count' FROM tasks t, task_columns c where t.column_id = c.id AND (t.column_id=1 OR t.column_id=2 OR t.column_id=3) GROUP BY t.column_id` , (err, rows, fieds) => {
+        if(err){
+            console.log("Failed" + err);
+            res.end()
+            return
+        }
+        console.log("Success!")
+        res.json(rows)
+    })
+})
+app.get("/tasks/users", (req,res) =>{
+   
+    dbConnection.query(`SELECT u.firstname,c.column_title,COUNT(*) as 'task_count' FROM tasks t, task_columns c, users u where t.column_id = c.id AND t.user_id = u.user_id AND t.column_id=3 GROUP BY u.firstname` , (err, rows, fieds) => {
+        if(err){
+            console.log("Failed" + err);
+            res.end()
+            return
+        }
+        console.log("Success!")
+        res.json(rows)
+    })
+})
 app.get("/", (req,res) =>{
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Headers', "*");
