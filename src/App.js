@@ -14,6 +14,7 @@ import Analytics from './Analytics/Analytics';
 import Team from './Team/Team';
 import AuthContextProvider, { AuthContext } from './context/AuthContext';
 import Contact from './contact/Contact';
+import { HashRouter } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -45,7 +46,7 @@ function App() {
   const context = useContext(AuthContext);
   const {isAuthenticated} = context;
   return (
-      <Router>
+      <HashRouter >
         <Grid container spacing={0}>
           <Grid item xs={12} >
             {(windowDimensions.width > 600) ? <Paper className={classes.nav}><NavBar /></Paper> : <Paper className={classes.nav}><HamNav /></Paper>}
@@ -64,7 +65,7 @@ function App() {
             </div>:''}
           <Redirect to='/' />
         </Switch>
-      </Router>
+      </HashRouter >
   );
 }
 
