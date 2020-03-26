@@ -276,7 +276,7 @@ function App() {
       setTimeout(function () {
         var nodes = document.querySelectorAll('div.msgContainer');
         nodes[nodes.length - 1].scrollIntoView();
-      }, 200);
+      }, 300);
 
     }
   }
