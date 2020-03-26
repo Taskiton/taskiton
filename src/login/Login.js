@@ -63,8 +63,35 @@ export default function Login() {
                 localStorage.setItem("isAuth", true)
                 toggleAuth(true);
                 history.push("/dashboard");
+                if(result.code === 200) {
+                    fetchUsename(data.email);
+                }
             }
         }).catch(function (err) {
+            console.log(err)
+        });
+    }
+
+    function fetchUsename(email) {
+        let url = "http://api.taskiton.wmdd.ca/user/"+email;
+        fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' }
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - Fetching your username");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data[0].firstname);
+            if(data[0]) {
+                localStorage.setItem("username", data[0].firstname+" "+data[0].lastname);
+            }
+        }).catch(function (err) {
+            alert("Error - Fetching your username");
             console.log(err)
         });
     }

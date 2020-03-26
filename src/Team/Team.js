@@ -13,10 +13,13 @@ import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
   root:{
-      maxWidth: '50%',
-      marginTop: '15vh',
+      // maxWidth: '50%',
+      marginTop: '8vh',
       paddingLeft:'20px',
-      margin:'auto'
+      margin:'auto',
+      [theme.breakpoints.down('xs')]: {
+        width: '80%',
+      }
   },
   centerAlign:{
     textAlign:'center',
@@ -33,7 +36,10 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(20),
     height: theme.spacing(20),
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
+    [theme.breakpoints.down('xs')]: {
+      marginTop:'5vh',
+    }
   }
 
 }));

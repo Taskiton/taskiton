@@ -105,7 +105,7 @@ export default function NavBar(props) {
       
       <Typography className={classes.root} >
         <Box className={classes.linkStyle}>
-        <img className={classes.logoStyle} style={{width:38,height:38}} src={LogoDesktop}></img>
+        <img className={classes.logoStyle} style={{width:38,height:38, marginTop:-8}} src={LogoDesktop}></img>
           <Link to="/" style={linkStyle} className={classes.linkStyle}>
             Home
       </Link>

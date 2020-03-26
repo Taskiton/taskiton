@@ -12,8 +12,6 @@ import SendIcon from '@material-ui/icons/Send';
 import ApiConfig from '../../config/config'
 import {Card,Chip, Divider, CardActions, CardContent,List, ListItem,Button,Typography,Input} from '@material-ui/core';
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -72,6 +70,19 @@ const useStyles = makeStyles(theme => ({
 }
 }));
 
+
+//Fetching the username
+let username = UserData.users[1].displayname;
+if(localStorage.getItem("username")) {
+  username = localStorage.getItem("username").split(" ")[0];
+} 
+
+
+let userInitials = "BN";
+if(localStorage.getItem("username")) {
+  userInitials = localStorage.getItem("username").split(" ")[0].charAt(0)+localStorage.getItem("username").split(" ")[1].charAt(0);
+} 
+
 // Our main Component, the parent to all the others, the one to rule them all.
 function App() {
   const classes = useStyles();
@@ -83,7 +94,6 @@ function App() {
   const [channel,setChannel] = useState(defaultChannel);
   const [messages,setMessages] = useState([]);
   // const [username] = useState([UserData.users[0].displayname,Math.floor(Math.random() * 10)].join('-'));
-  const [username] = useState(UserData.users[1].displayname);
   // const tempChannel = useInput();
   const tempMessage = useInput();
 
@@ -312,13 +322,12 @@ function Message(props){
   //console.log(document.getElementById('chip'))
   // console.log(breakMessage)
   let boldUsername = userName;
-
+  userInitials = props.uuid.charAt(0);
   var messageIndividual = `${boldUsername} - ${props.text}`
   return (
     <div>
       <ListItemText className={classes.mainMessage}>  
-      
-      <Avatar className={classes.avatar}>YT</Avatar>
+      <Avatar className={classes.avatar}>{userInitials}</Avatar>
       <div className={classes.chatInfoContainer}>
       <span className={classes.chatUsername}>{props.uuid}</span>
       <span className={classes.date}>{props.date}</span>

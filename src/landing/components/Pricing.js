@@ -1,5 +1,17 @@
 import React from 'react';
 import PricingCard from './PricingCard';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    pricing : {
+        width: '100%', 
+        textAlign: 'center', 
+        height:'80vh',
+        [theme.breakpoints.down('xs')]: {
+            height: '100vh',
+        } 
+    }
+  }));
 
 const Pricing = () => {
 
@@ -8,9 +20,10 @@ const Pricing = () => {
         padding:5,
         
     }
+    const classes = useStyles();
 
     return (
-        <div style={{ width: '100%', textAlign: 'center', height:'79vh'}}>
+        <div className={classes.pricing}>
             <p style={planStyle}><b>Choose a plan that is right for you</b></p>
             <div style={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent:'center', flexWrap:'wrap', height:'100%'}}>
                 <PricingCard title="Starter" desc="This is a Starter plan" price="Free" />
