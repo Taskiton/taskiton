@@ -8,6 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import useInput from './InputControl';
 import PubNub from 'pubnub';
+import SendIcon from '@material-ui/icons/Send';
 import ApiConfig from '../../config/config'
 import {Card,Chip, Divider, CardActions, CardContent,List, ListItem,Button,Typography,Input} from '@material-ui/core';
 
@@ -279,7 +280,7 @@ function App() {
               color="primary"
               onClick={publishMessage}
               >
-              Submit
+              <SendIcon/>
             </Button>
           </CardActions>
         </Card>
@@ -290,7 +291,7 @@ function App() {
 function Log(props) {
 
   return(
-    <List style={{maxHeight:'50vh', overflow:'auto'}} component="nav">
+    <List style={{maxHeight:'70vh', overflow:'auto'}} component="nav">
       <ListItem>
       <Typography component="div">
         { props.messages.map((item, index)=>(

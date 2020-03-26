@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from "react-router-dom";
-
+import LogoDesktop from "../../images/T.svg";
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: theme.spacing(2),
@@ -20,6 +20,12 @@ const useStyles = makeStyles(theme => ({
       margin: 'auto',
       padding: '2vh',
     }
+  },
+  logoStyle:{
+    float:'left',
+    position: 'relative',
+    left: '-4vw',
+   
   },
   buttonStyle: {
     marginLeft: theme.spacing(2),
@@ -42,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   linkStyle: {
     fontWeight: 'bold',
     color: 'black',
+    top:'3px',
     fontSize: '1em',
     textDecoration: 'none',
     fontFamily: 'sans-serif',
@@ -95,8 +102,10 @@ export default function NavBar(props) {
   return (
 
     <div>
+      
       <Typography className={classes.root} >
         <Box className={classes.linkStyle}>
+        <img className={classes.logoStyle} style={{width:38,height:38}} src={LogoDesktop}></img>
           <Link to="/" style={linkStyle} className={classes.linkStyle}>
             Home
       </Link>

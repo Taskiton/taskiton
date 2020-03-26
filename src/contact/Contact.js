@@ -19,6 +19,8 @@ const Contact = () => {
 
     return (
         <div>
+          <h1 className='contactus-header'>Contact Us</h1>
+          <h3 className='contactus-header'>Got a question? We'd love to hear from you.Send us a message and we'll respond as soon as possible</h3>
             <Paper variant="outlined" square className='formContainer'>
             <form onSubmit={()=>{alert("Thank you for the message, we will get back to you soon!")}}>
                 <label for="fname"><b>Name</b></label>
@@ -27,7 +29,7 @@ const Contact = () => {
                 <input className="contactInput" type="email" id="email" name="email" placeholder="Your email.." required/>
                 <label for="msg"><b>Message</b></label>
                 <input className="contactInput" type="text" id="msg" name="msg" placeholder="Your message.." required style={{height:150}}/>
-                <input className="contactSubmit" type="submit" value="Contact Us"
+                <input className="contactSubmit" type="submit" value="Send a Message"
                 />
             </form>
             </Paper>
