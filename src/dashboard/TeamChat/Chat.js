@@ -29,13 +29,16 @@ const useStyles = makeStyles(theme => ({
 
   },
   chatAvatar: {
+    width: '95%',
+    overflowWrap: 'break-word',
+    height: 'auto',
     backgroundColor: '#e6e6e6',
-    height: '7vh',
+    // height: '7vh',
     overflow:'auto',
     marginLeft: '3vw',
     borderRadius: '10px',
-    boxShadow:'5px 5px 21px -15px rgba(64,56,64,0.69)'
-    
+    boxShadow:'5px 5px 21px -15px rgba(64,56,64,0.69)',
+    padding:10
   },
   messageContainer:{
     position:'relative',
@@ -56,7 +59,7 @@ const useStyles = makeStyles(theme => ({
 
   },
   mainMessage:{
-    
+     width:'32%',
      marginTop:'2vh'
   },
   avatar: {
@@ -129,7 +132,7 @@ function App() {
   }
   //This is where we set up PubNub and handle events that come through. 
   useEffect(()=>{
-    const timer = setTimeout(() => {
+    // const timer = setTimeout(() => {
     getUserListFromAPI();
     console.log("setting up pubnub"+username);
     const pubnub = new PubNub({
@@ -211,7 +214,7 @@ function App() {
       pubnub.unsubscribeAll();
       setMessages([]);
     }
-  }, 2000);
+  // }, 2000);
   },[channel, username]);
   
 
@@ -274,8 +277,8 @@ function App() {
       <Card>
           <CardContent>
             <div className="top">
-              <Typography variant="h5" inline >
-                Group Chat
+              <Typography variant="h5" inline style={{textAlign:'center', width:'100%'}}>
+                <span >Group Chat</span>
                 </Typography>
             </div>
             <div >
@@ -310,7 +313,7 @@ function App() {
 function Log(props) {
 
   return(
-    <List style={{maxHeight:'70vh', overflow:'auto'}} component="nav">
+    <List style={{maxHeight:'70vh', overflowX:'hidden'}} component="nav">
       <ListItem>
       <Typography component="div">
         { props.messages.map((item, index)=>(
@@ -329,7 +332,7 @@ function Message(props){
   let message = props.text;
   let breakMessage = message.replace(/(.{5})/g, "$1");
   //console.log(document.getElementById('chip'))
-  // console.log(breakMessage)
+  //console.log(breakMessage)
   let boldUsername = userName;
   if(props.uuid === undefined) {
     userInitials = "*";
@@ -338,15 +341,17 @@ function Message(props){
   }
   var messageIndividual = `${boldUsername} - ${props.text}`
   return (
-    <div>
+    <div >
       <ListItemText className={classes.mainMessage}>  
       <Avatar className={classes.avatar}>{userInitials}</Avatar>
       <div className={classes.chatInfoContainer}>
       <span className={classes.chatUsername}>{props.uuid}</span>
       <span className={classes.date}>{props.date}</span>
       </div>
-      <div className={classes.messageContainer}>
-        <Chip id="chip" className={classes.chatAvatar} label={breakMessage} />
+      <div className={classes.messageContainer}> 
+        <div id="chip" className={classes.chatAvatar} label={breakMessage} >
+          {breakMessage}
+        </div>
       </div>
       </ListItemText>
     
