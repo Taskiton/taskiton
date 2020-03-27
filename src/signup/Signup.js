@@ -36,7 +36,10 @@ export default function Signup() {
     }
 
     function handleSubmit(event) {
-        
+        if(user.password!==user.copassword) {
+            alert("Password does not match!");
+            return;
+        }
         event.preventDefault()
         var data = {
             mail: user.mail,
@@ -60,17 +63,45 @@ export default function Signup() {
             // console.log(response)
             // return response.json();
         }).then(function (data) {
-            // console.log(data);
+            //console.log(user.mail);
             localStorage.setItem("isAuth", true)
+            localStorage.setItem("username","John Doe");
             toggleAuth(true);
-            history.push("/dashboard");
+            history.push("/dashboard");        
+            fetchUsename(user.mail);
             if (data == "success") {
                 console.log("Success");
             }
         }).catch(function (err) {
+            console.log(err);
+            alert("Error! Email may already exist in our record!");
+        });
+    }
+
+    function fetchUsename(email) {
+        console.log(email)
+        let url = "http://api.taskiton.wmdd.ca/user/"+email;
+        fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json, text/plain, */*'
+            ,'Content-Type': 'application/json' }
+        }).then(response => {
+            console.log(response);
+            if (response.status >= 400) {
+                alert("Error - Fetching your username");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if(data[0]) {
+                localStorage.setItem("username", data[0].firstname+" "+data[0].lastname);
+            }
+        }).catch(function (err) {
+            alert("Error - Fetching your username");
             console.log(err)
         });
     }
+
     function handleChange(event) {
         const { name, value } = event.target
 
@@ -101,15 +132,16 @@ export default function Signup() {
                     <img className={classes.signupImage} src={signupLogo}></img>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <form onSubmit={(event) => handleSubmit(event)} style={frmStyle} noValidate autoComplete="off">
+                    <form onSubmit={(event) => handleSubmit(event)} style={frmStyle}  autoComplete="off">
                         <h1 style={{ textAlign: 'center', fontSize: '2.1em', marginTop: '0', color: 'black' }}>Create Account</h1>
-                        <FormItem style={{ marginTop: '1vh' }} label="Email" name='mail' value={user.mail} onChange={(event) => handleChange(event)} />
+                        <FormItem style={{ marginTop: '1vh' }} label="Email" name='mail' type="email" value={user.mail} onChange={(event) => handleChange(event)} />
                         <FormItem label="First Name" name='name' value={user.name} onChange={(event) => handleChange(event)} />
                         <FormItem label="Last Name" name='lastname' value={user.lastname} onChange={(event) => handleChange(event)} />
                         <FormItem type='password' label="Password" name='password' value={user.password} onChange={(event) => handleChange(event)} />
                         <FormItem type='password' label="Confirm Password" name='copassword' value={user.copassword} onChange={(event) => handleChange(event)} />
                         <Button id="submitButton" type="submit" className={classes.signUpButton} variant="contained" color="primary"> SIGN UP </Button>
-                        <Button id="loginButton" className={classes.loginButton} variant="contained" color="primary" onClick={handleLogin}> LOGIN </Button>
+                        {/* <input type="submit" value="Submit" /> */}
+                        <Button id="loginButton" className={classes.loginButton} onClick={handleLogin} variant="contained" color="primary"> LOGIN </Button>
                     </form>
                 </Grid>
             </Grid>
