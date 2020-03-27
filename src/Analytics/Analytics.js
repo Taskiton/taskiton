@@ -73,13 +73,13 @@ export default function Analytics() {
                     <UserLineChart/> 
                     </Paper>
                 </Grid>
-                <Grid item xs={12} sm={12} className={classes.userLineChart}>
+                {/* In progress */}
+                {/* <Grid item xs={12} sm={12} className={classes.userLineChart}>
                     <Paper className={classes.chartPos} elevation={3} >
                         <h2 className={classes.chartHeadline}>Completed tasks by users</h2>
                     <HorizontalGraph/> 
                     </Paper>
-                </Grid>
-
+                </Grid> */}
             </Grid>
         </div>
     );
