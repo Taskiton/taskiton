@@ -162,8 +162,13 @@ export default function Kanban() {
         
         let numbOfTasks = Object.keys(allTasks).length;
         let newTaskId = '';
+        var date = new Date();
+        var hrs = date.getHours();
+        var mins = date.getMinutes();
+        var secs = date.getSeconds();
+        var milisecs = date.getMilliseconds();
         if(numbOfTasks>0) {
-            newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]));
+            newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]))+'-'+hrs+mins+secs+milisecs;
         } else {
             newTaskId = 'task-1';
         }

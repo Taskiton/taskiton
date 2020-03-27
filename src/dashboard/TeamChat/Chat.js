@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
   messageContainer: {
     position: 'relative',
-    top: '4vh'
+    top: '4vh',
   },
   chatInfoContainer: {
     position: 'relative',
@@ -59,7 +59,8 @@ const useStyles = makeStyles(theme => ({
 
   },
   mainMessage: {
-    width: '40%',
+    minWidth: '200px',
+    maxWidth: '200px',
     marginTop: '2vh'
   },
   avatar: {
