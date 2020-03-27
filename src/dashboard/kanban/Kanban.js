@@ -170,7 +170,7 @@ export default function Kanban() {
         if(numbOfTasks>0) {
             newTaskId = 'task-' + (++((Array.from(Object.keys(allTasks))[numbOfTasks - 1]).split("-")[1]))+'-'+hrs+mins+secs+milisecs;
         } else {
-            newTaskId = 'task-1';
+            newTaskId = 'task-'+hrs+mins+secs+milisecs;
         }
         
         let assignedUser = "";
