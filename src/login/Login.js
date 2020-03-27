@@ -123,9 +123,9 @@ export default function Login() {
                     <img className={classes.signupImage} src={signupLogo}></img>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <form onSubmit={(event) => handleSubmit(event)} style={frmStyle} noValidate autoComplete="off">
+                    <form onSubmit={(event) => handleSubmit(event)} style={frmStyle} autoComplete="off">
                         <h1 style={{ textAlign: 'center', fontSize: '2.1em', marginTop: '0', color: 'black' }}>Login To System</h1>
-                        <FormItem style={{ marginTop: '1vh' }} label="Email" name='mail' value={user.mail} onChange={(event) => handleChange(event)} />
+                        <FormItem style={{ marginTop: '1vh' }} type='email' label="Email" name='mail' value={user.mail} onChange={(event) => handleChange(event)} />
                         <FormItem type='password' label="Password" name='password' value={user.password} onChange={(event) => handleChange(event)} />
                         <Button  type='submit' className={classes.loginButton} variant="contained" color="primary" on> LOGIN </Button>
                     </form>
