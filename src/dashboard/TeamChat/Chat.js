@@ -98,9 +98,11 @@ function App() {
     const timer = setTimeout(() => {
       setUsername(localStorage.getItem("username").split(" ")[0]);
       var nodes = document.querySelectorAll('div.msgContainer');
-      nodes[nodes.length - 1].scrollIntoView();
+      if( nodes[nodes.length - 1]!== undefined) {
+        nodes[nodes.length - 1].scrollIntoView();
+      }
     }, 1000);
-  }, [username]);
+  }, [username]);  
 
   const [channel, setChannel] = useState(defaultChannel);
   const [messages, setMessages] = useState([]);
