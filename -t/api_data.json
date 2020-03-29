@@ -1,0 +1,731 @@
+[
+  {
+    "type": "DELETE",
+    "url": "http://api.taskiton.wmdd.ca/tasks",
+    "title": "Delete a task",
+    "group": "Tasks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "task_id",
+            "description": "<p>Task id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n {\n\"success\":\"success deleted\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/appRoutes.js",
+    "groupTitle": "Tasks",
+    "name": "DeleteHttpApiTaskitonWmddCaTasks"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/columnmapping",
+    "title": "List Tasks that has specific status().",
+    "group": "Tasks",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "column_id",
+            "description": "<p>(Column-1 is New Task. Column-2 is in progress. Column-3 is Done)</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n{\n        {\n    \"column-1\": [\n        \"task-26-122861\"\n    ],\n    \"column-2\": [\n        \"task-24-10540227\"\n    ],\n    \"column-3\": [\n        \"task-23-225424816\",\n        \"task-24-1031628\",\n        \"task-26-1228771\"\n    ]\n        }\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/appRoutes.js",
+    "groupTitle": "Tasks",
+    "name": "GetHttpApiTaskitonWmddCaColumnmapping"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/task",
+    "title": "List task count",
+    "group": "Tasks",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "taskcount",
+            "description": "<p>Task</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "  HTTP/1.1 200 OK\n{\n      {\n       \"taskcount\": 5\n       }\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Tasks",
+    "name": "GetHttpApiTaskitonWmddCaTask"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/tasks/analyze",
+    "title": "List count of task who has a status",
+    "group": "Tasks",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "column_title",
+            "description": "<p>Type of task(New Task, In Progress, Completed)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "task_count",
+            "description": "<p>Total task's counts</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "  HTTP/1.1 200 OK\n{\n       {\n       \"column_title\": \"Completed\",\n       \"task_count\": 3\n       }\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Tasks",
+    "name": "GetHttpApiTaskitonWmddCaTasksAnalyze"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/tasks/users",
+    "title": "List how many task complete by each users.",
+    "group": "Tasks",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "first_name",
+            "description": "<p>Name of the user</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "column_title",
+            "description": "<p>Status of task</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "task_count",
+            "description": "<p>Count of task</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "  HTTP/1.1 200 OK\n{\n        {\n       \"firstname\": \"Gokche\",\n       \"column_title\": \"Completed\",\n       \"task_count\": 1\n       }\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Tasks",
+    "name": "GetHttpApiTaskitonWmddCaTasksUsers"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/userlist",
+    "title": "List All Tasks",
+    "group": "Tasks",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "task_id",
+            "description": "<p>Task_id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "task_name",
+            "description": "<p>Task Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "task_details",
+            "description": "<p>Task Details</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "date",
+            "optional": false,
+            "field": "due_date",
+            "description": "<p>Due Date</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "date",
+            "optional": false,
+            "field": "due_time",
+            "description": "<p>Due Time</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User_id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "column_id",
+            "description": "<p>Column Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user_name",
+            "description": "<p>First name and LastName of user</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "column_name",
+            "description": "<p>Column Name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n{\n        \"task-24-1031628\": {\n        \"id\": 89,\n        \"task_id\": \"task-24-1031628\",\n        \"task_name\": \"Presentation\",\n        \"task_details\": \"dnasjkdkn\",\n        \"due_date\": \"3/28/2020\",\n        \"due_time\": null,\n        \"user_id\": 59,\n        \"column_id\": 3,\n        \"user_name\": \"Yalcin Tatar\",\n        \"column_name\": \"column-3\"\n        }\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/appRoutes.js",
+    "groupTitle": "Tasks",
+    "name": "GetHttpApiTaskitonWmddCaUserlist"
+  },
+  {
+    "type": "post",
+    "url": "http://api.taskiton.wmdd.ca/tasks",
+    "title": "Create a task",
+    "group": "Tasks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Task id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "TaskName",
+            "description": "<p>Task's name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "details",
+            "description": "<p>Task's details</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "dueDate",
+            "description": "<p>Task's due date</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignedTo",
+            "description": "<p>Assigned User</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n {\n\"success\":\"success added\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/appRoutes.js",
+    "groupTitle": "Tasks",
+    "name": "PostHttpApiTaskitonWmddCaTasks"
+  },
+  {
+    "type": "post",
+    "url": "http://api.taskiton.wmdd.ca/user",
+    "title": "Update a task",
+    "group": "Tasks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "taskName",
+            "description": "<p>Task's name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "details",
+            "description": "<p>Task's detail</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "dueDate",
+            "description": "<p>Task's dueDate</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignedTo",
+            "description": "<p>Assigned User</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "task_id",
+            "description": "<p>Task ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n {\n\"code\":200,\n\"success\":\"success update\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/appRoutes.js",
+    "groupTitle": "Tasks",
+    "name": "PostHttpApiTaskitonWmddCaUser"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/userlist",
+    "title": "List Users with user_id",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User_id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Firstname and Lastname of the users</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n{\n        \"user_id\": 60,\n        \"name\": \"Arsh Deep\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/appRoutes.js",
+    "groupTitle": "Users",
+    "name": "GetHttpApiTaskitonWmddCaUserlist"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/users",
+    "title": "List all users",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>User's list</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User_id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User's Email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "firstname",
+            "description": "<p>User's name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "lastname",
+            "description": "<p>User's lastname</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "pw",
+            "description": "<p>User's password</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "confirm_pw",
+            "description": "<p>Confirm User's password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "  HTTP/1.1 200 OK\n{\n       \"user_id\": 36,\n       \"email\": \"trial123@gmail.com\",\n       \"firstname\": \"Trial\",\n       \"lastname\": \"ABC\",\n       \"pw\": \"123\",\n       \"confirm_pw\": \"123\"\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Users not found",
+          "content": "HTTP/1.1 404 Not Found",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Users",
+    "name": "GetHttpApiTaskitonWmddCaUsers"
+  },
+  {
+    "type": "get",
+    "url": "http://api.taskiton.wmdd.ca/users/:id",
+    "title": "List a user with a specific id",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User's id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User_id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User's Email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "firstname",
+            "description": "<p>User's name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "lastname",
+            "description": "<p>User's lastname</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "pw",
+            "description": "<p>User's password</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "confirm_pw",
+            "description": "<p>Confirm User's password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "  HTTP/1.1 200 OK\n{\n       \"user_id\": 36,\n       \"email\": \"trial123@gmail.com\",\n       \"firstname\": \"Trial\",\n       \"lastname\": \"ABC\",\n       \"pw\": \"123\",\n       \"confirm_pw\": \"123\"\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Users not found",
+          "content": "HTTP/1.1 404 Not Found",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Users",
+    "name": "GetHttpApiTaskitonWmddCaUsersId"
+  },
+  {
+    "type": "post",
+    "url": "http://api.taskiton.wmdd.ca/user",
+    "title": "Login with username and password",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mail",
+            "description": "<p>User's email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User's password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "   HTTP/1.1 200 OK\n {\n\"code\":200,\n\"success\":\"login sucessfull\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Users",
+    "name": "PostHttpApiTaskitonWmddCaUser"
+  },
+  {
+    "type": "post",
+    "url": "http://api.taskiton.wmdd.ca/user_create",
+    "title": "Create a user",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mail",
+            "description": "<p>User's email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>User's name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lastname",
+            "description": "<p>User's lastname</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User's password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "copassword",
+            "description": "<p>User's confirm password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Input",
+          "content": "{\n  \"email\": \"ytexample@gmail.com\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User_id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User's Email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "firstname",
+            "description": "<p>User's name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "lastname",
+            "description": "<p>User's lastname</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "pw",
+            "description": "<p>User's password</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "confirm_pw",
+            "description": "<p>Confirm User's password</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "/Users/yalcintatar/Documents/taskiton/server/server.js",
+    "groupTitle": "Users",
+    "name": "PostHttpApiTaskitonWmddCaUser_create"
+  }
+]
