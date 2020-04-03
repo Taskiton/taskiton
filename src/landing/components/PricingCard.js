@@ -72,7 +72,11 @@ function PricingCard(props) {
                     <p>per user/month</p>
                 </CardContent>
                 <CardActions >
-                    <Button className={classes.actionBtn} onClick={handleClick}><b>Try it</b></Button>
+                {props.title==="Pro" 
+                ? <Button style={{backgroundColor:'#D3D3D3'}} disabled className={classes.actionBtn} onClick={handleClick}><b>Try it</b></Button>
+                :<Button className={classes.actionBtn} onClick={handleClick}><b>Try it</b></Button>
+            }
+                                    
                 </CardActions>
             </Card>
         </div>
