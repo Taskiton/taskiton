@@ -46,12 +46,16 @@ const useStyles = makeStyles(theme => ({
   },
   chatInfoContainer: {
     position: 'relative',
-    top: '3vh'
+    top: '3vh',
+    width:'100%'
   },
   date: {
-    fontSize: '10px',
+    fontSize: '11px',
+    width:'100%',
+    marginTop:'1vh',
     color: '#A9A9A9',
-    marginLeft: '1vw'
+    marginLeft: '1vw',
+    position:'absolute'
   },
   chatUsername: {
     fontWeight: '420',

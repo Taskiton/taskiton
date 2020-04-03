@@ -142,7 +142,7 @@ export default function HamNav() {
         </div>
         <Divider />
 
-        <NavBar isHamNav={true} />
+        <NavBar isHamNav={true}/>
 
       </Drawer>
     </div>

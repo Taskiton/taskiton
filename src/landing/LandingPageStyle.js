@@ -16,7 +16,7 @@ export const landingPageStyle = makeStyles(theme => ({
     promo1: {
         height: '78vh',
         [theme.breakpoints.down('xs')]: {
-            // height: '60vh',
+             height: '52vh',
         }
     },
     promo2: {

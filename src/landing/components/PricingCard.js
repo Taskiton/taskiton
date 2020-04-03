@@ -16,7 +16,15 @@ const useStyles = makeStyles(theme => ({
         top: '3vh',
         [theme.breakpoints.down('xs')]: {
             width:'100%',
+            margin:'auto',
             top: '1vh',
+        }
+    },
+    mainContainer: {
+        height: '70%',
+        [theme.breakpoints.down('xs')]: {
+            marginBottom:'3vh',
+            height:'50%'
         }
     },
     title: {
@@ -55,7 +63,7 @@ function PricingCard(props) {
     }
 
     return (
-        <div style={{height:'70%'}}>
+        <div className={classes.mainContainer}>
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <p className={classes.title}>{props.title}</p>

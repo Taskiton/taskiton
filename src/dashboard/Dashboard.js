@@ -12,13 +12,20 @@ const useStyles = makeStyles(theme => ({
     gridTeam: {
         boxShadow: "2px 3px 5px #888888",
         width:"5vw",
-        height:"90vh", 
+        height:"92vh", 
         display:"flex",
         borderRadius: "2%",
         justifyContent: "center",
         alignItems: "baseline",       
         [theme.breakpoints.down('xs')]: {
-            display:"none",
+            // display:"none",
+            width:"100%",
+            height:"7vh",
+            position:"fixed",
+            bottom:0,
+            boxShadow: "2px 3px 5px #888888",
+            backgroundColor:'#ebecf0'
+
         }
     },
     gridKanban: { 
@@ -27,6 +34,7 @@ const useStyles = makeStyles(theme => ({
         overflow: "auto",
         [theme.breakpoints.down('xs')]: {
             width:"100vw",
+            marginBottom:'2vh'
         }
     },
     gridChat: {

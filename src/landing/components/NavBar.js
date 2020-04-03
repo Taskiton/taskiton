@@ -77,7 +77,6 @@ export default function NavBar(props) {
   const { isAuthenticated, toggleAuth} = context;
 
   const classes = useStyles();
-
   const preventDefault = event => event.preventDefault();
 
   const linkStyle = (props.isHamNav) ?
@@ -86,6 +85,7 @@ export default function NavBar(props) {
       textAlign: 'center',
       paddingTop: '20%',
       margin: 'auto',
+          
       // boxShadow: '0px 2px #888888',
     } : {
       paddingRight: '5%',

@@ -17,6 +17,12 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(6),
         height: theme.spacing(6),
         marginTop: "20px",
+        [theme.breakpoints.down('xs')]: {
+            display:'inline',
+            padding:'10px',
+            bottom:'-2vh',
+            margin:'10px'
+        }
     },
 }));
 
