@@ -129,6 +129,7 @@ export default function Signup() {
         <div className={classes.formStyle}>
             <Grid container>
                 <Grid item xs={12} sm={6}>
+                    {/* Image Ref: https://www.vecteezy.com/vector-art/634286-online-store-landing-page-template-with-isometric-illustration */}
                     <img className={classes.signupImage} src={signupLogo}></img>
                 </Grid>
                 <Grid item xs={12} sm={6}>

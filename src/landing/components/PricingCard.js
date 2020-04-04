@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     mainContainer: {
-        height: '70%',
+        height: '60%',
         [theme.breakpoints.down('xs')]: {
             marginBottom:'3vh',
             height:'50%'

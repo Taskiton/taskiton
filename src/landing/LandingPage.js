@@ -24,6 +24,7 @@ export default function LandingPage() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <div className={classes.promo1} style={{ backgroundColor: '' }}>
+                        {/* Image Ref: https://www.vecteezy.com/vector-art/286796-flat-modern-minimalist-graphic-design-software-vector-illustration */}
                         <img className={classes.landingPhoto} src={landingLogo} alt="mainpic"></img>
                         
                     </div>
