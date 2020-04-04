@@ -18,9 +18,9 @@ const useStyles = makeStyles(theme => ({
         height: theme.spacing(6),
         marginTop: "20px",
         [theme.breakpoints.down('xs')]: {
-            display:'inline',
+            display:'inline-flex',
             padding:'10px',
-            bottom:'-2vh',
+            bottom: '0.5vh',
             margin:'10px'
         }
     },

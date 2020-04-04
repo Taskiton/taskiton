@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
             // display:"none",
             width:"100%",
             height:"7vh",
-            position:"fixed",
+            position:"relative",
+            zIndex:1,
             bottom:0,
             boxShadow: "2px 3px 5px #888888",
             backgroundColor:'#ebecf0'
