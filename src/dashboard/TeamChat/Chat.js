@@ -1,21 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import './Chat.css';
-import UserData from "./userData"
-import { makeStyles } from '@material-ui/core/styles';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
-import useInput from './InputControl';
-import PubNub from 'pubnub';
-import SendIcon from '@material-ui/icons/Send';
-import ApiConfig from '../../config/config'
-import { Card, Chip, Divider, CardActions, CardContent, List, ListItem, Button, Typography, Input } from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import "./Chat.css";
+import UserData from "./userData";
+import { makeStyles } from "@material-ui/core/styles";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
+import useInput from "./InputControl";
+import PubNub from "pubnub";
+import SendIcon from "@material-ui/icons/Send";
+import ApiConfig from "../../config/config";
+import {
+  Card,
+  Chip,
+  Divider,
+  CardActions,
+  CardContent,
+  List,
+  ListItem,
+  Button,
+  Typography,
+  Input,
+} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > *': {
+    display: "flex",
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -26,68 +37,66 @@ const useStyles = makeStyles(theme => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[100]),
     backgroundColor: deepPurple[500],
-
   },
   chatAvatar: {
-    width: '95%',
-    overflowWrap: 'break-word',
-    height: 'auto',
-    backgroundColor: '#e6e6e6',
+    width: "95%",
+    overflowWrap: "break-word",
+    height: "auto",
+    backgroundColor: "#e6e6e6",
     // height: '7vh',
-    overflow: 'auto',
-    marginLeft: '3vw',
-    borderRadius: '10px',
-    boxShadow: '5px 5px 21px -15px rgba(64,56,64,0.69)',
-    padding: 10
+    overflow: "auto",
+    marginLeft: "3vw",
+    borderRadius: "10px",
+    boxShadow: "5px 5px 21px -15px rgba(64,56,64,0.69)",
+    padding: 10,
   },
   messageContainer: {
-    position: 'relative',
-    top: '4vh',
+    position: "relative",
+    top: "4vh",
   },
   chatInfoContainer: {
-    position: 'relative',
-    top: '3vh',
-    width:'100%'
+    position: "relative",
+    top: "3vh",
+    width: "100%",
   },
   date: {
-    fontSize: '11px',
-    width:'100%',
-    marginTop:'1vh',
-    color: '#A9A9A9',
-    marginLeft: '1vw',
-    position:'absolute'
+    fontSize: "11px",
+    width: "100%",
+    marginTop: "1vh",
+    color: "#A9A9A9",
+    marginLeft: "1vw",
+    position: "absolute",
   },
   chatUsername: {
-    fontWeight: '420',
-    marginLeft: '3vw'
-
+    fontWeight: "420",
+    marginLeft: "3vw",
   },
   mainMessage: {
-    minWidth: '200px',
-    maxWidth: '200px',
-    marginTop: '2vh'
+    minWidth: "200px",
+    maxWidth: "200px",
+    marginTop: "2vh",
   },
   avatar: {
-    position: 'absolute',
-    marginTop: '3vh',
+    position: "absolute",
+    marginTop: "3vh",
     color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: '#F76C6C',
+    backgroundColor: "#F76C6C",
     width: theme.spacing(4),
     height: theme.spacing(4),
-
-  }
+  },
 }));
-
 
 //Fetching the username
 // let username = UserData.users[1].displayname;
 // if(localStorage.getItem("username")) {
 //   username = localStorage.getItem("username").split(" ")[0];
-// } 
+// }
 
 let userInitials = "BN";
 if (localStorage.getItem("username")) {
-  userInitials = localStorage.getItem("username").split(" ")[0].charAt(0) + localStorage.getItem("username").split(" ")[1].charAt(0);
+  userInitials =
+    localStorage.getItem("username").split(" ")[0].charAt(0) +
+    localStorage.getItem("username").split(" ")[1].charAt(0);
 }
 
 // Our main Component, the parent to all the others, the one to rule them all.
@@ -102,12 +111,12 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setUsername(localStorage.getItem("username").split(" ")[0]);
-      var nodes = document.querySelectorAll('div.msgContainer');
-      if( nodes[nodes.length - 1]!== undefined) {
+      var nodes = document.querySelectorAll("div.msgContainer");
+      if (nodes[nodes.length - 1] !== undefined) {
         nodes[nodes.length - 1].scrollIntoView();
       }
     }, 1000);
-  }, [username]);  
+  }, [username]);
 
   const [channel, setChannel] = useState(defaultChannel);
   const [messages, setMessages] = useState([]);
@@ -116,30 +125,30 @@ function App() {
   const tempMessage = useInput();
 
   function getUserListFromAPI() {
-
-    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'http://api.taskiton.wmdd.ca/users';
-    fetch(url, {
-      headers: { 'Content-Type': 'application/json' },
-
-    }).then(function (response) {
-      // console.log(response.status)
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    }).then(function (result) {
-      console.log(result);
-      if (result.code === 204) {
-        alert(result.success);
-      } else if (result.code === 200) {
-
-      }
-    }).catch(function (err) {
-      console.log(err)
-    });
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://server.taskiton.wmdd.ca/users";
+    fetch(proxyurl + url, {
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(function (response) {
+        // console.log(response.status)
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function (result) {
+        console.log(result);
+        if (result.code === 204) {
+          alert(result.success);
+        } else if (result.code === 200) {
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
-  //This is where we set up PubNub and handle events that come through. 
+  //This is where we set up PubNub and handle events that come through.
   useEffect(() => {
     // const timer = setTimeout(() => {
     getUserListFromAPI();
@@ -147,14 +156,13 @@ function App() {
     const pubnub = new PubNub({
       publishKey: ApiConfig.PUBLISHKEY,
       subscribeKey: ApiConfig.SUBSCRIBEKEY,
-      uuid: username
+      uuid: username,
     });
-
 
     pubnub.addListener({
       status: function (statusEvent) {
         if (statusEvent.category === "PNConnectedCategory") {
-          console.log("Connected to PubNub!")
+          console.log("Connected to PubNub!");
         }
       },
       message: (msg) => {
@@ -167,42 +175,45 @@ function App() {
           newMessages.push({
             uuid: msg.message.uuid,
             text: msg.message.text,
-            date: localeDateTime
+            date: localeDateTime,
           });
-          setMessages(messages => messages.concat(newMessages))
+          setMessages((messages) => messages.concat(newMessages));
         }
       },
       presence: function (p) {
         // handle presence
-        var timeout = p.timetoken
+        var timeout = p.timetoken;
         var occupancy = p.occupancy; // No. of users connected with the channel
         var state = p.state; // User State
         var publishTime = p.timestamp; // Publish timetoken
-        var timetoken = p.timeout;  // Current timetoken
-        console.log(occupancy)
-      }
+        var timetoken = p.timeout; // Current timetoken
+        console.log(occupancy);
+      },
     });
 
-    pubnub.hereNow({
-      channels: ['Global'],
-      includeUUIDs: true,
-      includeState: true,
-    }, (status, response) => {
-      //console.log(response);
-    });
+    pubnub.hereNow(
+      {
+        channels: ["Global"],
+        includeUUIDs: true,
+        includeState: true,
+      },
+      (status, response) => {
+        //console.log(response);
+      }
+    );
 
     //Subscribes to the channel in our state
     pubnub.subscribe({
       channels: [channel],
-      withPresence: true
+      withPresence: true,
     });
     pubnub.history(
       {
         channel: channel,
         count: 10, // 100 is the default
-        stringifiedTimeToken: true // false is the default
-      }, function (status, response) {
-
+        stringifiedTimeToken: true, // false is the default
+      },
+      function (status, response) {
         let newMessages = [];
         for (let i = 0; i < response.messages.length; i++) {
           const unixTimestamp = response.messages[i].timetoken / 10000000;
@@ -211,25 +222,24 @@ function App() {
           newMessages.push({
             uuid: response.messages[i].entry.uuid,
             text: response.messages[i].entry.text,
-            date: localeDateTime
+            date: localeDateTime,
           });
           //console.log(response.messages)
         }
-        setMessages(messages => messages.concat(newMessages));
+        setMessages((messages) => messages.concat(newMessages));
       }
     );
     return function cleanup() {
       console.log("shutting down pubnub");
       pubnub.unsubscribeAll();
       setMessages([]);
-    }
+    };
     // }, 2000);
   }, [channel, username]);
 
-
   function handleKeyDown(event) {
     if (event.target.id === "messageInput") {
-      if (event.key === 'Enter') {
+      if (event.key === "Enter") {
         publishMessage();
       }
     }
@@ -257,34 +267,32 @@ function App() {
     //     }
     //   }
     // }
-
   }
 
   //Publishing messages via PubNub
   function publishMessage() {
-    console.log(username)
+    console.log(username);
     if (tempMessage.value) {
       let messageObject = {
         text: tempMessage.value,
-        uuid: username
+        uuid: username,
       };
 
       const pubnub = new PubNub({
         publishKey: "pub-c-10978436-24d2-4d1f-aadf-e88df92715b3",
         subscribeKey: "sub-c-1ae870c6-5741-11ea-814d-0ecb550e9de2",
-        uuid: username
+        uuid: username,
       });
       pubnub.publish({
         message: messageObject,
-        channel: channel
+        channel: channel,
       });
-      tempMessage.setValue('');
-      
+      tempMessage.setValue("");
+
       setTimeout(function () {
-        var nodes = document.querySelectorAll('div.msgContainer');
+        var nodes = document.querySelectorAll("div.msgContainer");
         nodes[nodes.length - 1].scrollIntoView();
       }, 300);
-
     }
   }
 
@@ -292,12 +300,15 @@ function App() {
     <Card>
       <CardContent>
         <div className="top">
-          <Typography variant="h5" inline style={{ textAlign: 'center', width: '100%' }}>
-            <span >Group Chat</span>
+          <Typography
+            variant="h5"
+            inline
+            style={{ textAlign: "center", width: "100%" }}
+          >
+            <span>Group Chat</span>
           </Typography>
         </div>
-        <div >
-
+        <div>
           <Log messages={messages} />
         </div>
       </CardContent>
@@ -309,14 +320,10 @@ function App() {
           value={tempMessage.value}
           onChange={tempMessage.onChange}
           onKeyDown={handleKeyDown}
-          inputProps={{ 'aria-label': 'Message Field', }}
+          inputProps={{ "aria-label": "Message Field" }}
           autoFocus={true}
         />
-        <Button
-          size="small"
-          color="primary"
-          onClick={publishMessage}
-        >
+        <Button size="small" color="primary" onClick={publishMessage}>
           <SendIcon />
         </Button>
       </CardActions>
@@ -326,19 +333,23 @@ function App() {
 
 //Log functional component that is the list of messages
 function Log(props) {
-
   return (
-    <List style={{ maxHeight: '70vh', overflowX: 'hidden' }} component="nav">
+    <List style={{ maxHeight: "70vh", overflowX: "hidden" }} component="nav">
       <ListItem>
         <Typography component="div">
           {props.messages.map((item, index) => (
-            <Message key={index} uuid={item.uuid} text={item.text} date={item.date} />
+            <Message
+              key={index}
+              uuid={item.uuid}
+              text={item.text}
+              date={item.date}
+            />
           ))}
         </Typography>
       </ListItem>
     </List>
-  )
-};
+  );
+}
 
 //Our message functional component that formats each message.
 function Message(props) {
@@ -354,9 +365,9 @@ function Message(props) {
   } else {
     userInitials = props.uuid.charAt(0);
   }
-  var messageIndividual = `${boldUsername} - ${props.text}`
+  var messageIndividual = `${boldUsername} - ${props.text}`;
   return (
-    <div className='msgContainer'>
+    <div className="msgContainer">
       <ListItemText className={classes.mainMessage}>
         <Avatar className={classes.avatar}>{userInitials}</Avatar>
         <div className={classes.chatInfoContainer}>
@@ -364,12 +375,11 @@ function Message(props) {
           <span className={classes.date}>{props.date}</span>
         </div>
         <div className={classes.messageContainer}>
-          <div id="chip" className={classes.chatAvatar} label={breakMessage} >
+          <div id="chip" className={classes.chatAvatar} label={breakMessage}>
             {breakMessage}
           </div>
         </div>
       </ListItemText>
-
     </div>
   );
 }
